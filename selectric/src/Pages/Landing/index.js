@@ -19,6 +19,8 @@ export default function Landing() {
     showPassword: false,
   });
 
+  const [goodLogin, setGoodLogin] = useState(false)
+
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -34,10 +36,26 @@ export default function Landing() {
     event.preventDefault();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log('submitted')
+      console.log('submit in progress')
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            ...values
+        }),
+      };
       
+      const result = await fetch('/api/auth/register',options)
+      if (result.status !== 200) {
+          setGoodLogin(false);
+          return;
+      }
+      const data = await result.json()
+      localStorage.setItem('token',data.token)
 
   }
 
