@@ -1,9 +1,9 @@
 import './App.css';
 import * as React from 'react';
-import Button from "@mui/material/Button";
+import Landing from './Pages/Landing';
 
 function App() {
-  return <Button>Hello world</Button>;
+  return <Landing/>;
 }
 
 export default App;
