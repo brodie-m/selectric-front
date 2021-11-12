@@ -3,7 +3,12 @@ import * as React from 'react';
 import Landing from './Pages/Landing';
 
 function App() {
-  return <Landing/>;
+  return (
+  <div>
+
+  <Landing/>
+  </div>
+  );
 }
 
 export default App;
