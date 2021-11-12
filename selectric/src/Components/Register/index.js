@@ -12,7 +12,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 export default function Register() {
     const [values, setValues] = useState({
-        name: "",
+        username: "",
         email: "",
         password: "",
         showPassword: false,
@@ -48,13 +48,14 @@ export default function Register() {
             }),
           };
           
-          const result = await fetch('/api/auth/register',options)
-          if (result.status !== 200) {
+          const result = await fetch('http://127.0.0.1:5000/register',options)
+          if (result.status !== 201) {
               setGoodLogin(false);
               return;
           }
           const data = await result.json()
           localStorage.setItem('token',data.token)
+          window.location.href='./dashboard'
     
       }
     return (
@@ -64,8 +65,8 @@ export default function Register() {
           <InputLabel htmlFor="outlined-name">Name</InputLabel>
           <OutlinedInput
             id="outlined-name"
-            value={values.name}
-            onChange={handleChange("name")}
+            value={values.username}
+            onChange={handleChange("username")}
             label="Name"
           ></OutlinedInput>
         </FormControl>

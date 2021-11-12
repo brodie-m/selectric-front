@@ -37,6 +37,7 @@ export default function Login() {
       const handleSubmit = async (e) => {
           e.preventDefault();
           console.log('submit in progress')
+          console.log(values)
           const options = {
             method: "POST",
             headers: {
@@ -47,12 +48,14 @@ export default function Login() {
             }),
           };
           
-          const result = await fetch('/api/auth/login',options)
+          const result = await fetch("http://127.0.0.1:5000/login",options)
           if (result.status !== 200) {
               setGoodLogin(false);
               return;
           }
           const data = await result.json()
+          localStorage.setItem('token',data.token)
+          window.location.href='./dashboard'
           localStorage.setItem('token',data.token)
     
       }
