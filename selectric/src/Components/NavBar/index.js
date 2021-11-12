@@ -11,7 +11,15 @@ export default function NavBar() {
     
     //     setState({ ...state, [anchor]: open });
     //   };
-
+    /* {/* <Drawer
+            anchor={menu}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+          >
+            {menuList}
+          </Drawer>
+        </> */
+        
     function handleClick(e) {
         e.preventDefault();
     }
@@ -36,13 +44,6 @@ export default function NavBar() {
             </Typography>
             </Toolbar>
         </AppBar>
-        {/* <Drawer
-            anchor={menu}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {menuList}
-          </Drawer>
-        </> */}
+        
     )
 }
