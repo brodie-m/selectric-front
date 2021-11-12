@@ -12,3 +12,8 @@
   --color-text: #81AFDD;
   --color-subtext: #FF8A71;
 }
+
+a {
+  text-decoration: none;
+  color: white;
+}

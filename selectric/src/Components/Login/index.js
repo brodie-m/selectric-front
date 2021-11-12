@@ -56,7 +56,7 @@ export default function Login() {
           const data = await result.json()
           localStorage.setItem('token',data.token)
           window.location.href='./dashboard'
-          localStorage.setItem('token',data.token)
+          
     
       }
     return (
@@ -95,7 +95,9 @@ export default function Login() {
             label="Password"
           />
         </FormControl>
-        <Button variant='contained' type='submit'>Submit</Button>
+        <Button sx={{ m: 1, px: 4, py: 1, backgroundColor: '#ff4820', '&:hover': {
+              backgroundColor: '#ff4820'
+          } }} variant='contained' type='submit'>Submit</Button>
       </FormGroup>
       </form>
     )

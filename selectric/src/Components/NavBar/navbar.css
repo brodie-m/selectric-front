@@ -1,0 +1,47 @@
+.selectric__navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    padding: 2rem 6rem;
+}
+
+.selectric__navbar-links {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.selectric__navbar-links_logo {
+    margin-right: 2rem
+}
+
+.selectric__navbar-links_logo img {
+    width: 100px;
+    height: 20px;
+}
+
+.selectric__navbar-links_container {
+    display: flex;
+    flex-direction: row;
+}
+
+.selectric__navbar-sign {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.selectric__navbar-links_container p,
+.selectric__navbar-sign p,
+.selectric__navbar-menu_container p {
+    color: white;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    text-transform: capitalize;
+    margin: 0 1rem;
+    cursor: pointer;
+}
