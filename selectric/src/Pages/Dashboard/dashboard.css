@@ -1,0 +1,27 @@
+.maps__holder {
+    width: 70vw;
+    
+}
+
+.info__holder {
+    
+    
+    width: 30vw;
+    
+}
+
+.profile__holder {
+    height: 25%;
+    background-color: red;
+}
+
+.options__holder {
+    height: 25%;
+    background-color: green;
+}
+
+.directions__holder {
+    height: 50%;
+    background-color: purple;
+}
+
