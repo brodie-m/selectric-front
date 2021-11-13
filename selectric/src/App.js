@@ -6,7 +6,7 @@ function App() {
   return (
   <div>
 
-  <Landing/>
+  <Landing className='gradient__bg'/>
   </div>
   );
 }

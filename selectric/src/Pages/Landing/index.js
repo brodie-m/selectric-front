@@ -1,5 +1,6 @@
 import { Button, Container, Dialog, Modal } from "@mui/material";
 import React, { useState } from "react";
+import Header from "../../Components/Header";
 import Login from "../../Components/Login";
 import NavBar from "../../Components/NavBar";
 import Register from "../../Components/Register";
@@ -13,14 +14,7 @@ export default function Landing() {
   return (
       <>
       <NavBar/>
-    <Container sx={{m: 2, p:2, display: "flex"}}>
-
-      <Button sx={{m: 1, p:1}} variant="contained" onClick = {() => {handleOpen(); setFormToDisplay(<Login/>)}}>Login</Button>
-      <Button sx={{m: 1, p:1}} variant="contained" onClick = {() => {handleOpen(); setFormToDisplay(<Register/>)}}>Register</Button>
-      <Dialog open={open} onClose = {handleClose}>
-          {formToDisplay}
-      </Dialog>
-    </Container>
+      <Header/>
     </>
     
   );
