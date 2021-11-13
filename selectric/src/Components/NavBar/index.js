@@ -48,7 +48,7 @@ export default function NavBar() {
       </div>
       <div className="selectric__navbar-sign">
         <Button
-          sx={{ m: 1, px: 4, py: 1, backgroundColor: 'transparent','&:hover': {
+          sx={{ m: 1, px: 4, py: 1, backgroundColor: 'transparent', color: 'white', '&:hover': {
             backgroundColor: '#ff4820' }}}
           variant="contained"
           onClick={() => {
@@ -59,7 +59,7 @@ export default function NavBar() {
           Login
         </Button>
         <Button
-          sx={{ m: 1, px: 4, py: 1, backgroundColor: '#ff4820', '&:hover': {
+          sx={{ m: 1, px: 4, py: 1, backgroundColor: '#ff4820', color: 'white', '&:hover': {
               backgroundColor: '#ff4820'
           } }}
           variant="contained"
