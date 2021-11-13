@@ -1,5 +1,5 @@
 .maps__holder {
-    width: 70vw;
+    
     
 }
 
@@ -26,7 +26,13 @@
 
 .directions__holder {
     height: 50%;
-    background-color: purple;
+    
     display: flex;
     flex-direction: column;
+}
+
+.maps__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

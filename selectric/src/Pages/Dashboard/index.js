@@ -5,13 +5,14 @@ import NavBar from "../../Components/NavBar";
 import "./dashboard.css";
 import Profile from "../../Components/Profile";
 import MapOptions from "../../Components/MapOptions";
-import mapStyles from './mapStyles'
+import mapStyles from "./mapStyles";
+import Directions from "../../Components/Directions";
 require("dotenv").config();
 
 export default function Dashboard() {
   const containerStyle = {
-    width: "55vw",
-    height: "55vw",
+    width: "40vw",
+    height: "40vw",
   };
 
   const center = {
@@ -20,39 +21,39 @@ export default function Dashboard() {
   };
 
   const options = {
-      styles: mapStyles
-  }
+    styles: mapStyles,
+  };
 
   return (
     <>
       <NavBar />
-      <Container maxWidth = 'xl' sx={{ display: "flex", flexDirection: "row" }}>
+      <div className="maps__container">
         <div className="info__holder">
           <div className="profile__holder">
-              <Profile/>
+            <Profile />
           </div>
           <div className="options__holder">
-              <MapOptions/>
+            <MapOptions />
           </div>
-          <div className="directions__holder">hello directions</div>
+          <div className="directions__holder">
+            <Directions />
+          </div>
         </div>
         <div className="maps__holder">
-          <LoadScript googleMapsApiKey='AIzaSyAXOBirCcvhAEK4R_6pCHv8J3mhICNlm34'>
+          <LoadScript googleMapsApiKey="AIzaSyAXOBirCcvhAEK4R_6pCHv8J3mhICNlm34">
             <GoogleMap
-            id='dashboard-map'
+              id="dashboard-map"
               mapContainerStyle={containerStyle}
               center={center}
               zoom={10}
               options={options}
-              
-              
             >
               {/* Child components, such as markers, info windows, etc. */}
               <></>
             </GoogleMap>
           </LoadScript>
         </div>
-      </Container>
+      </div>
     </>
   );
 }
