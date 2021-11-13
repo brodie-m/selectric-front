@@ -50,11 +50,12 @@ export default function Register() {
             }),
           };
           
-          const result = await fetch('http://127.0.0.1:5000/register',options)
+          const result = await fetch('https://selectric.herokuapp.com/register',options)
           if (result.status !== 201) {
               setGoodLogin(false);
               return;
           }
+          setGoodLogin(true)
           const data = await result.json()
           localStorage.setItem('token',data.token)
           window.location.href='./dashboard'

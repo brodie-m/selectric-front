@@ -51,13 +51,14 @@ export default function Login() {
             }),
           };
           
-          const result = await fetch("http://127.0.0.1:5000/login",options)
+          const result = await fetch("https://selectric.herokuapp.com/login",options)
           if (result.status !== 200) {
               setGoodLogin(false);
               return;
           }
           const data = await result.json()
           localStorage.setItem('token',data.token)
+          setGoodLogin(true)
           window.location.href='./dashboard'
           
     
