@@ -4,6 +4,7 @@ import { Container } from "@mui/material";
 import NavBar from "../../Components/NavBar";
 import "./dashboard.css";
 import Profile from "../../Components/Profile";
+import MapOptions from "../../Components/MapOptions";
 require("dotenv").config();
 
 export default function Dashboard() {
@@ -19,12 +20,14 @@ export default function Dashboard() {
   return (
     <>
       <NavBar />
-      <Container maxWidth="lg" sx={{ display: "flex", flexDirection: "row" }}>
+      <Container maxWidth = 'xl' sx={{ display: "flex", flexDirection: "row" }}>
         <div className="info__holder">
           <div className="profile__holder">
               <Profile/>
           </div>
-          <div className="options__holder">hello options</div>
+          <div className="options__holder">
+              <MapOptions/>
+          </div>
           <div className="directions__holder">hello directions</div>
         </div>
         <div className="maps__holder">
