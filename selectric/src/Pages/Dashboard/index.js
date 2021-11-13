@@ -3,6 +3,7 @@ import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Container } from "@mui/material";
 import NavBar from "../../Components/NavBar";
 import "./dashboard.css";
+import Profile from "../../Components/Profile";
 require("dotenv").config();
 
 export default function Dashboard() {
@@ -20,7 +21,9 @@ export default function Dashboard() {
       <NavBar />
       <Container maxWidth="lg" sx={{ display: "flex", flexDirection: "row" }}>
         <div className="info__holder">
-          <div className="profile__holder">hello profile</div>
+          <div className="profile__holder">
+              <Profile/>
+          </div>
           <div className="options__holder">hello options</div>
           <div className="directions__holder">hello directions</div>
         </div>
