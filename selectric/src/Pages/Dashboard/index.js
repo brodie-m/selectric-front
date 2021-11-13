@@ -5,6 +5,7 @@ import NavBar from "../../Components/NavBar";
 import "./dashboard.css";
 import Profile from "../../Components/Profile";
 import MapOptions from "../../Components/MapOptions";
+import mapStyles from './mapStyles'
 require("dotenv").config();
 
 export default function Dashboard() {
@@ -17,6 +18,11 @@ export default function Dashboard() {
     lat: 51.5012,
     lng: -0.1354,
   };
+
+  const options = {
+      styles: mapStyles
+  }
+
   return (
     <>
       <NavBar />
@@ -31,11 +37,15 @@ export default function Dashboard() {
           <div className="directions__holder">hello directions</div>
         </div>
         <div className="maps__holder">
-          <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
+          <LoadScript googleMapsApiKey='AIzaSyAXOBirCcvhAEK4R_6pCHv8J3mhICNlm34'>
             <GoogleMap
+            id='dashboard-map'
               mapContainerStyle={containerStyle}
               center={center}
               zoom={10}
+              options={options}
+              
+              
             >
               {/* Child components, such as markers, info windows, etc. */}
               <></>
