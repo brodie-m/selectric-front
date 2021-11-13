@@ -7,9 +7,11 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  Typography,
 } from "@mui/material";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
+import '../Login/Login.css'
 export default function Register() {
     const [values, setValues] = useState({
         username: "",
@@ -48,11 +50,12 @@ export default function Register() {
             }),
           };
           
-          const result = await fetch('http://127.0.0.1:5000/register',options)
+          const result = await fetch('https://selectric.herokuapp.com/register',options)
           if (result.status !== 201) {
               setGoodLogin(false);
               return;
           }
+          setGoodLogin(true)
           const data = await result.json()
           localStorage.setItem('token',data.token)
           window.location.href='./dashboard'
@@ -61,7 +64,8 @@ export default function Register() {
     return (
         <form onSubmit={handleSubmit}>
       <FormGroup>
-        <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+      <h2 className ='gradient__text login__text-title' style={{fontWeight: 800}}>new here? sign up!</h2>
+        <FormControl sx={{ m: 1, width: "auto" }} variant="outlined">
           <InputLabel htmlFor="outlined-name">Name</InputLabel>
           <OutlinedInput
             id="outlined-name"
@@ -70,7 +74,7 @@ export default function Register() {
             label="Name"
           ></OutlinedInput>
         </FormControl>
-        <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+        <FormControl sx={{ m: 1, width: "auto" }} variant="outlined">
           <InputLabel htmlFor="outlined-email">Email</InputLabel>
           <OutlinedInput
             id="outlined-email"
@@ -79,7 +83,7 @@ export default function Register() {
             label="Email"
           ></OutlinedInput>
         </FormControl>
-        <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+        <FormControl sx={{ m: 1, width: "auto" }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">
             Password
           </InputLabel>
@@ -103,7 +107,9 @@ export default function Register() {
             label="Password"
           />
         </FormControl>
-        <Button variant='contained' type='submit'>Submit</Button>
+        <Button sx={{ m: 1, px: 4, py: 1, backgroundColor: '#ff4820', '&:hover': {
+              backgroundColor: '#ff4820'
+          } }} variant='contained' type='submit'>Submit</Button>
       </FormGroup>
       </form>
     )

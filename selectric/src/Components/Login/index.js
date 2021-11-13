@@ -3,13 +3,16 @@ import {
     Button,
   FormControl,
   FormGroup,
+  FormHelperText,
   IconButton,
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  Typography,
 } from "@mui/material";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
+import './Login.css'
 export default function Login() {
     const [values, setValues] = useState({
         email: "",
@@ -48,21 +51,23 @@ export default function Login() {
             }),
           };
           
-          const result = await fetch("http://127.0.0.1:5000/login",options)
+          const result = await fetch("https://selectric.herokuapp.com/login",options)
           if (result.status !== 200) {
               setGoodLogin(false);
               return;
           }
           const data = await result.json()
           localStorage.setItem('token',data.token)
+          setGoodLogin(true)
           window.location.href='./dashboard'
-          localStorage.setItem('token',data.token)
+          
     
       }
     return (
         <form onSubmit={handleSubmit}>
       <FormGroup>
-        <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+        <h2 className ='gradient__text login__text-title' style={{fontWeight: 800}}>welcome back!</h2>
+        <FormControl sx={{ m: 1, width: 'auto' }} variant="outlined">
           <InputLabel htmlFor="outlined-email">Email</InputLabel>
           <OutlinedInput
             id="outlined-email"
@@ -71,7 +76,7 @@ export default function Login() {
             label="Email"
           ></OutlinedInput>
         </FormControl>
-        <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+        <FormControl sx={{ m: 1, width: "auto" }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">
             Password
           </InputLabel>
@@ -95,7 +100,9 @@ export default function Login() {
             label="Password"
           />
         </FormControl>
-        <Button variant='contained' type='submit'>Submit</Button>
+        <Button sx={{ m: 1, px: 4, py: 1, color: 'white', backgroundColor: '#ff4820', '&:hover': {
+              backgroundColor: '#ff4820'
+          } }} variant='contained' type='submit'>Submit</Button>
       </FormGroup>
       </form>
     )
