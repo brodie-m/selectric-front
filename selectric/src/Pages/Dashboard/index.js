@@ -74,7 +74,8 @@ export default function Dashboard() {
         return {
           "name": point.AddressInfo.Title,
           "lat": point.AddressInfo.Latitude,
-          "lng": point.AddressInfo.Longitude
+          "lng": point.AddressInfo.Longitude,
+          "powerLevel": point.Connections[0].LevelID
         }
       })
       setMarkers(markers)
@@ -115,7 +116,7 @@ export default function Dashboard() {
               key = {index}
               position = {{lat: marker.lat,lng: marker.lng}}
               icon ={{
-                url: '/bolt1.svg',
+                url: `bolt${marker.powerLevel}.svg`,
                 scaledSize: new window.google.maps.Size(30,30)
               }}
               />)
