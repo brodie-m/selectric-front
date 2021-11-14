@@ -1,5 +1,7 @@
 .options__container {
     display: grid;
+    align-items: center;
+    justify-content: center;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 }
@@ -18,6 +20,7 @@
 .options__item-c {
     grid-column-start: 2;
     grid-row-start: 1;
+    align-self: center;
 }
 
 .options__item-d {
