@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Container } from "@mui/material";
 import NavBar from "../../Components/NavBar";
@@ -23,19 +23,36 @@ export default function Dashboard() {
   const options = {
     styles: mapStyles,
   };
+  useLayoutEffect(() => {
+    const titles = document.querySelectorAll('.anim')
+    const observer =new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate')
+            }
+            else {entry.target.classList.remove('animate')}
+        })
+    })
+    titles.forEach(title=> {
+        observer.observe(title)
+    })
+    return () => {
+        
+    };
+}, [])
 
   return (
     <>
       <NavBar />
       <div className="maps__container">
         <div className="info__holder">
-          <div className="profile__holder">
+          <div className="profile__holder anim" style={{animationDelay: '-0.3s'}}>
             <Profile />
           </div>
-          <div className="options__holder">
+          <div className="options__holder anim" style={{animationDelay: '-0.2s'}}>
             <MapOptions />
           </div>
-          <div className="directions__holder">
+          <div className="directions__holder anim"  style={{animationDelay: '-0.1s'}}>
             <Directions />
           </div>
         </div>
