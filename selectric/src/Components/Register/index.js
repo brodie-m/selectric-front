@@ -12,6 +12,7 @@ import {
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import '../Login/Login.css'
+import logo from '../../assets/logo.svg'
 export default function Register() {
     const [values, setValues] = useState({
         username: "",
@@ -64,6 +65,7 @@ export default function Register() {
     return (
         <form onSubmit={handleSubmit}>
       <FormGroup>
+      <img src={logo} className = 'form__logo'/>
       <h2 className ='gradient__text login__text-title' style={{fontWeight: 800}}>new here? sign up!</h2>
         <FormControl sx={{ m: 1, width: "auto" }} variant="outlined">
           <InputLabel htmlFor="outlined-name">Name</InputLabel>
