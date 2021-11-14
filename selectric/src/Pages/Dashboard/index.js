@@ -114,6 +114,10 @@ export default function Dashboard() {
               markers && markers.map((marker,index) => <Marker 
               key = {index}
               position = {{lat: marker.lat,lng: marker.lng}}
+              icon ={{
+                url: '/bolt1.svg',
+                scaledSize: new window.google.maps.Size(30,30)
+              }}
               />)
               
               }
