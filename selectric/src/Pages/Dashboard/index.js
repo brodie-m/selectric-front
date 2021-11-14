@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useState } from "react";
-import { DirectionsRenderer, DirectionsService, GoogleMap, LoadScript } from "@react-google-maps/api";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { DirectionsRenderer, DirectionsService, GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { Container } from "@mui/material";
 import NavBar from "../../Components/NavBar";
 import "./dashboard.css";
@@ -10,6 +10,12 @@ import Directions from "../../Components/Directions";
 require("dotenv").config();
 
 export default function Dashboard() {
+
+  const [markers, setMarkers] = useState([])
+  const handleChange = (prop) => (event) => {
+    console.log(event, event.target.value)
+    setValues({ ...values, [prop]: event.target.value });
+  };
 
   function directionsCallback (response) {
     console.log(response)
@@ -60,11 +66,24 @@ export default function Dashboard() {
     titles.forEach(title=> {
         observer.observe(title)
     })
+    async function fetchChargePoints() {
+      const result = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&countrycode=GB&maxresults=10?key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`)
+      const data = await result.json()
+      const markers = data.map(point => {
+        return {
+          "name": point.AddressInfo.Title,
+          "lat": point.AddressInfo.Latitude,
+          "lng": point.AddressInfo.Longitude
+        }
+      })
+      setMarkers(markers)
+    }
+    fetchChargePoints()
     return () => {
         
     };
 }, [])
-
+  
   return (
     <>
       <NavBar />
@@ -74,7 +93,7 @@ export default function Dashboard() {
             <Profile />
           </div>
           <div className="options__holder anim" style={{animationDelay: '-0.2s'}}>
-            <MapOptions />
+            <MapOptions handleChange={handleChange}/>
           </div>
           <div className="directions__holder anim"  style={{animationDelay: '-0.1s'}}>
             <Directions />
@@ -89,7 +108,14 @@ export default function Dashboard() {
               zoom={10}
               options={options}
             >
-              {/* Child components, such as markers, info windows, etc. */}
+              
+              {/* Child components, such as markers, info windows, etc. */
+              markers && markers.map((marker,index) => <Marker 
+              key = {index}
+              position = {{lat: marker.lat,lng: marker.lng}}
+              />)
+              
+              }
               <DirectionsService 
                 options={{
                   destination: values.destination,

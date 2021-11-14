@@ -10,8 +10,8 @@ import {
 import PendingIcon from "@mui/icons-material/Pending";
 import React, { useState } from "react";
 import './options.css'
-export default function MapOptions() {
-  function handleChange() {}
+export default function MapOptions(props) {
+  const handleChange = props.handleChange;
 function handleSubmit() {}
   const [values, setValues] = useState({
     from: "",
@@ -25,7 +25,7 @@ function handleSubmit() {}
           <OutlinedInput
             id="outlined-from"
             value={values.from}
-            onChange={handleChange("email")}
+            onChange={handleChange("from")}
             label="Email"
           ></OutlinedInput>
         </FormControl>
@@ -35,7 +35,7 @@ function handleSubmit() {}
           <OutlinedInput
             id="outlined-to"
             value={values.to}
-            onChange={handleChange("email")}
+            onChange={handleChange("to")}
             label="Email"
           ></OutlinedInput>
         </FormControl>
