@@ -52,6 +52,8 @@ export default function Dashboard() {
 
   const options = {
     styles: mapStyles,
+    disableDefaultUI: true,
+    zoomControl: true
   };
   useLayoutEffect(() => {
     const titles = document.querySelectorAll('.anim')
@@ -67,7 +69,13 @@ export default function Dashboard() {
         observer.observe(title)
     })
     async function fetchChargePoints() {
-      const result = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&countrycode=GB&maxresults=100?key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`)
+
+      const polyline = values.response.routes[0].overview_polyline
+      const distance= 1
+      const maxResults = 40
+
+      //const result = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&countrycode=GB&maxresults=100?key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`)
+      const result = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&distance=${distance}&polyline=${polyline}&maxresults=${maxResults}&key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`)
       const data = await result.json()
       console.log(data)
       const markers = data.map(point => {
