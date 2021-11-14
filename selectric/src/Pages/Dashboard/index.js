@@ -1,5 +1,5 @@
-import React, { useLayoutEffect } from "react";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import React, { useLayoutEffect, useState } from "react";
+import { DirectionsRenderer, DirectionsService, GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Container } from "@mui/material";
 import NavBar from "../../Components/NavBar";
 import "./dashboard.css";
@@ -10,6 +10,30 @@ import Directions from "../../Components/Directions";
 require("dotenv").config();
 
 export default function Dashboard() {
+
+  function directionsCallback (response) {
+    console.log(response)
+
+    if (response !== null) {
+      if (response.status === 'OK') {
+        setValues(
+          () => ({
+            response
+          })
+        )
+      } else {
+        console.log('response: ', response)
+      }
+    }
+  }
+
+  const [values, setValues] = useState({
+    origin: 'London',
+    destination: 'Edinburgh',
+    travelMode: 'DRIVING',
+    response: null,
+  })
+
   const containerStyle = {
     width: "40vw",
     height: "40vw",
@@ -57,7 +81,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="maps__holder">
-          <LoadScript googleMapsApiKey="AIzaSyAXOBirCcvhAEK4R_6pCHv8J3mhICNlm34">
+          <LoadScript googleMapsApiKey="AIzaSyCMnp0NR1KzbU5BYQP_MY8CIhBa9CigoGE">
             <GoogleMap
               id="dashboard-map"
               mapContainerStyle={containerStyle}
@@ -66,7 +90,18 @@ export default function Dashboard() {
               options={options}
             >
               {/* Child components, such as markers, info windows, etc. */}
-              <></>
+              <DirectionsService 
+                options={{
+                  destination: values.destination,
+                  origin: values.origin,
+                  travelMode: values.travelMode
+                }}
+                callback={directionsCallback}
+
+              />
+              <DirectionsRenderer 
+                options={{directions: values.response}}
+              />
             </GoogleMap>
           </LoadScript>
         </div>
