@@ -8,3 +8,9 @@
     margin-left: 1rem;
     margin-top: 1rem;
 }
+
+.form__logo {
+    margin-top: 1rem;
+    align-self: start;
+    margin-left: 1rem;
+}
