@@ -52,6 +52,8 @@ export default function Dashboard() {
 
   const options = {
     styles: mapStyles,
+    disableDefaultUI: true,
+    zoomControl: true
   };
   useLayoutEffect(() => {
     const titles = document.querySelectorAll('.anim')
@@ -100,7 +102,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="maps__holder">
-          <LoadScript googleMapsApiKey="AIzaSyCMnp0NR1KzbU5BYQP_MY8CIhBa9CigoGE">
+          <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
             <GoogleMap
               id="dashboard-map"
               mapContainerStyle={containerStyle}
