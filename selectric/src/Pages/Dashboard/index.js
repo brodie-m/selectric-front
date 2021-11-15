@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { DirectionsRenderer, DirectionsService, GoogleMap, InfoWindow, LoadScript, Marker, useLoadScript } from "@react-google-maps/api";
 import { Container } from "@mui/material";
 import NavBar from "../../Components/NavBar";
@@ -9,15 +9,23 @@ import mapStyles from "./mapStyles";
 import Directions from "../../Components/Directions";
 require("dotenv").config();
 const zoom = 10
+const libraries=['places']
 export default function Dashboard() {
-
-  const libraries=['places']
+  const mapRef = useRef()
+  const onMapLoad = useCallback(
+    (map) => {
+      mapRef.current = map
+      setService(new window.google.maps.places.PlacesService(mapRef.current))
+    },
+    [],
+  )
+  
 
   const {isLoaded, loadError} = useLoadScript({
-    googleMapsApiKey: "AIzaSyCMnp0NR1KzbU5BYQP_MY8CIhBa9CigoGE",
+    googleMapsApiKey: "AIzaSyCFTum7OQMJw2xx0luble3U25N-QcRQg1g",
     libraries
   })
-
+  const [service, setService] = useState(null)
   const [selected, setSelected] = useState(false)
   const [markers, setMarkers] = useState([])
 
@@ -67,6 +75,8 @@ export default function Dashboard() {
     console.log(values)
   }
 
+  const [places, setPlaces] = useState(null)
+
   const [values, setValues] = useState({
     //origin: 'London',
     //destination: 'Edinburgh',
@@ -96,6 +106,8 @@ export default function Dashboard() {
     styles: mapStyles
   }
 
+  
+  
   useLayoutEffect(() => {
     
     const titles = document.querySelectorAll('.anim')
@@ -117,7 +129,7 @@ export default function Dashboard() {
       const maxResults = 40
 
       //const result = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&countrycode=GB&maxresults=100?key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`)
-      const result = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&distance=${distance}&polyline=${polyline}&maxresults=${maxResults}&key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`)
+      const result = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&distance=${distance}&polyline=${polyline}&maxresults=${maxResults}&key=AIzaSyCMnp0NR1KzbU5BYQP_MY8CIhBa9CigoGE`)
       const data = await result.json()
       console.log(data)
       data.forEach(point => console.log(point.UsageType))
@@ -146,6 +158,7 @@ export default function Dashboard() {
         }
       })
       setMarkers(markers)
+      setPlaces(null)
     }
     fetchChargePoints()
     return () => {
@@ -153,6 +166,8 @@ export default function Dashboard() {
     };
 }, [values.response])
   
+
+
   return ( isLoaded? 
     <>
       <NavBar />
@@ -176,6 +191,7 @@ export default function Dashboard() {
               center={center}
               zoom={12}
               options={options}
+              onLoad={onMapLoad}
             >
               
               {/* Child components, such as markers, info windows, etc. */
@@ -188,13 +204,48 @@ export default function Dashboard() {
                 origin: new window.google.maps.Point(0,0),
                 anchor: new window.google.maps.Point(10,10)
               }}
-              onClick = {() => {
+              onClick = { async () => {
                 console.log(marker)
                 setSelected(marker)
+                
+                let request = {
+                  location: new window.google.maps.LatLng(marker.lat,marker.lng),
+                  radius: 1604,
+                }
+                service.nearbySearch(request, (results, status) => {
+                  
+                  if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
+                    setPlaces(results.map((place)=> {return {
+                        ...place, lat: place.geometry.location.lat(), lng:place.geometry.location.lng()
+                    }}));
+                  }
+                  console.log(places)
+                });
               }}
+              
+              
               />)
               
-              } {
+              } 
+              {places ? places.map((place,index) => <Marker 
+              key = {place.id}
+              position = {{lat: place.lat,lng: place.lng}}
+              icon ={{
+                url: place.icon,
+                scaledSize: new window.google.maps.Size(30,30),
+                origin: new window.google.maps.Point(0,0),
+                anchor: new window.google.maps.Point(10,10)
+              }}
+              />
+              )
+              
+              
+              
+              
+              
+              : <h1>NO PLACES</h1>}
+
+              {
                 selected && 
                 <div className = 'maps__infoWindow'>
                 <InfoWindow 
