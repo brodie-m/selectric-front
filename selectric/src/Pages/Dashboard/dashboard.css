@@ -40,3 +40,7 @@
 .maps__infoWindow {
     background-color: red;
 }
+
+.places__marker {
+    stroke: white;
+}

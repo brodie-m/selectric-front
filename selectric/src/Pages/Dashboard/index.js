@@ -1,3 +1,4 @@
+
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import {
   DirectionsRenderer,
@@ -8,6 +9,12 @@ import {
   Marker,
   useLoadScript,
 } from "@react-google-maps/api";
+
+
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { DirectionsRenderer, DirectionsService, GoogleMap, InfoWindow, LoadScript, Marker, useLoadScript, StandaloneSearchBox } from "@react-google-maps/api";
+
+
 import { Container } from "@mui/material";
 import NavBar from "../../Components/NavBar";
 import "./dashboard.css";
@@ -15,10 +22,14 @@ import Profile from "../../Components/Profile";
 import MapOptions from "../../Components/MapOptions";
 import mapStyles from "./mapStyles";
 import Directions from "../../Components/Directions";
+
+
 require("dotenv").config();
+
 const zoom = 10;
+const libraries = ["places"];
 export default function Dashboard() {
-  const libraries = ["places"];
+  
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyCMnp0NR1KzbU5BYQP_MY8CIhBa9CigoGE",
@@ -28,6 +39,15 @@ export default function Dashboard() {
   const [selected, setSelected] = useState(false);
   const [markers, setMarkers] = useState([]);
   const [connections, setConnections] = useState([]);
+  const [selected, setSelected] = useState(false)
+  const onMapLoad = useCallback(
+    (map) => {
+      mapRef.current = map
+      setService(new window.google.maps.places.PlacesService(mapRef.current))
+    },
+    [],
+  )
+
 
   // const handleChange = (prop) => (event) => {
   //   console.log(event, event.target.value)
@@ -57,11 +77,15 @@ export default function Dashboard() {
 
   const handleChange = (a, event) => {
     //console.log(event)//, event.target.value)
-    console.log(event.target.value);
-    console.log(a);
-    console.log(endpoints);
-    setEndpoints({ ...endpoints, [a]: event.target.value });
-    console.log(endpoints);
+
+    console.log('handle change ttiggerd')
+    console.log(event)
+  //  console.log(event.target.value)
+    console.log('this is a ' + a)
+    console.log( endpoints)
+    setEndpoints({ ...endpoints, [a]: event });
+    console.log(endpoints)
+
   };
 
   function handleGo() {
@@ -86,6 +110,7 @@ export default function Dashboard() {
     console.log(values);
   }
 
+
   const handleSelect = (selected) => {
     const selectedArray = [...connections];
     selectedArray.push(selected);
@@ -105,6 +130,9 @@ export default function Dashboard() {
   //     location: new window.google.maps.LatLng(connection.lat, connection.lng),
   //   };
   // });
+
+  const [places, setPlaces] = useState(null)
+
 
   const [values, setValues] = useState({
     //origin: 'London',
@@ -135,7 +163,10 @@ export default function Dashboard() {
     styles: mapStyles,
   };
 
+  
+  
   useLayoutEffect(() => {
+
     const titles = document.querySelectorAll(".anim");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -166,6 +197,7 @@ export default function Dashboard() {
       console.log(data);
       data.forEach((point) => console.log(point.UsageType));
       const markers = data.map((point) => {
+
         return {
           name: point.AddressInfo.Title,
           lat: point.AddressInfo.Latitude,
@@ -178,6 +210,7 @@ export default function Dashboard() {
               statusType: connection.StatusType,
             };
           }),
+
           usageCost: point.UsageCost,
           usageType: point.UsageType,
           operational: point.Connections.filter((connection) => {
@@ -257,6 +290,7 @@ export default function Dashboard() {
                 <InfoWindow
                   position={{ lat: selected.lat, lng: selected.lng }}
                   onCloseClick={() => setSelected(null)}
+
                 >
                   <div>
                     <h1 className="gradient__text">{selected.name}</h1>
@@ -290,6 +324,7 @@ export default function Dashboard() {
                       Select
                     </button>
                   </div>
+
                 </InfoWindow>
               </div>
             )}
@@ -306,8 +341,9 @@ export default function Dashboard() {
               options={{ directions: values.response, zoom: zoom }}
             />
           </GoogleMap>
+
         </div>
-      </div>
+      
     </>
   ) : (
     "loading"
