@@ -56,6 +56,7 @@ export default function Dashboard() {
     zoomControl: true
   };
   useLayoutEffect(() => {
+    
     const titles = document.querySelectorAll('.anim')
     const observer =new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -70,7 +71,7 @@ export default function Dashboard() {
     })
     async function fetchChargePoints() {
 
-      const polyline = values.response.routes[0].overview_polyline
+      const polyline = values.response && values.response.routes[0].overview_polyline
       const distance= 1
       const maxResults = 40
 
