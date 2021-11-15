@@ -34,7 +34,7 @@ export default function Dashboard() {
 
   const mapRef = useRef()
 
-
+  const token = localStorage.getItem('token')
   async function fetchUserData() {
     const options = {
         method: 'GET',

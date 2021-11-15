@@ -30,8 +30,8 @@ export default function Profile( props) {
         <div className='profile__holder'>
             <Avatar alt='profile picture' sx={{height: '70px',width:'70px'}}/>
             <div className='names__holder'>
-            <h2 className='profile__name'>{userData && userData.username}</h2>
-            <h3 className = 'car__name'>Tesla Model S</h3>
+            <h2 className='profile__name'>{props.userData && props.userData.username}</h2>
+            <h3 className = 'car__name'>{props.userData && props.userData.selectedCar}</h3>
             </div>
             
         </div>
