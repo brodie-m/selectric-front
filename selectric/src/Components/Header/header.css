@@ -84,18 +84,3 @@
 
 }
 
-.animate {
-    animation: reveal 1s forwards;
-
-}
-
-@keyframes reveal {
-    from {
-        opacity: 0;
-        transform: translateX(-180px)
-    }
-    to {
-        opacity: 1;
-        transform:translateX(0px);
-    }
-}
