@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { DirectionsRenderer, DirectionsService, GoogleMap, InfoWindow, LoadScript, Marker } from "@react-google-maps/api";
+import { DirectionsRenderer, DirectionsService, GoogleMap, InfoWindow, LoadScript, Marker, StandaloneSearchBox } from "@react-google-maps/api";
 import { Container } from "@mui/material";
 import NavBar from "../../Components/NavBar";
 import "./dashboard.css";
@@ -7,13 +7,15 @@ import Profile from "../../Components/Profile";
 import MapOptions from "../../Components/MapOptions";
 import mapStyles from "./mapStyles";
 import Directions from "../../Components/Directions";
+
+
 require("dotenv").config();
 
 export default function Dashboard() {
   const [selected, setSelected] = useState(false)
   const [markers, setMarkers] = useState([])
 
-  
+
   // const handleChange = (prop) => (event) => {
   //   console.log(event, event.target.value)
   //   setValues({ ...values, [prop]: event.target.value });
@@ -43,10 +45,12 @@ export default function Dashboard() {
 
   const handleChange = (a, event) => {
     //console.log(event)//, event.target.value)
-    console.log(event.target.value)
-    console.log(a)
-    console.log(endpoints)
-    setEndpoints({ ...endpoints, [a]: event.target.value });
+    console.log('handle change ttiggerd')
+    console.log(event)
+  //  console.log(event.target.value)
+    console.log('this is a ' + a)
+    console.log( endpoints)
+    setEndpoints({ ...endpoints, [a]: event });
     console.log(endpoints)
   };
 
@@ -84,23 +88,23 @@ export default function Dashboard() {
     zoomControl: true
   };
   useLayoutEffect(() => {
-    
+
     const titles = document.querySelectorAll('.anim')
-    const observer =new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate')
-            }
-            else {entry.target.classList.remove('animate')}
-        })
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate')
+        }
+        else { entry.target.classList.remove('animate') }
+      })
     })
-    titles.forEach(title=> {
-        observer.observe(title)
+    titles.forEach(title => {
+      observer.observe(title)
     })
     async function fetchChargePoints() {
 
       const polyline = values.response && values.response.routes[0].overview_polyline
-      const distance= 1
+      const distance = 1
       const maxResults = 40
 
       //const result = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&countrycode=GB&maxresults=100?key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`)
@@ -119,27 +123,44 @@ export default function Dashboard() {
     }
     fetchChargePoints()
     return () => {
-        
+
     };
-}, [values.response])
-  
+  }, [values.response])
+
+
+  let searchBox
+
+  const onLoad = ref => {
+    searchBox = ref
+  }
+  const onPlacesChanged = () => {
+    console.log("HIIIIIIIIIIIIII");
+    // console.log(searchBox.getPlaces());
+  }
+
+
+
   return (
     <>
       <NavBar />
-      <div className="maps__container">
-        <div className="info__holder">
-          <div className="profile__holder anim" style={{animationDelay: '-0.3s'}}>
-            <Profile />
+      <LoadScript googleMapsApiKey="AIzaSyAkT9l74nNgW3KmQ6nmiLJ1V0h4SuCE5AQ" libraries={["places"]} >
+        <div className="maps__container">
+          <div className="info__holder">
+            <div className="profile__holder anim" style={{ animationDelay: '-0.3s' }}>
+              <Profile />
+            </div>
+            <div className="options__holder anim" style={{ animationDelay: '-0.2s' }}>
+              <MapOptions handleSubmit={handleSubmit} handleChange={handleChange} values={values} setValues={setValues} />
+            </div>
+            <div className="directions__holder anim" style={{ animationDelay: '-0.1s' }}>
+              <Directions />
+            </div>
           </div>
-          <div className="options__holder anim" style={{animationDelay: '-0.2s'}}>
-            <MapOptions handleSubmit={handleSubmit} handleChange={handleChange} values={values} setValues={setValues} />
-          </div>
-          <div className="directions__holder anim"  style={{animationDelay: '-0.1s'}}>
-            <Directions />
-          </div>
-        </div>
-        <div className="maps__holder">
-          <LoadScript googleMapsApiKey="AIzaSyCMnp0NR1KzbU5BYQP_MY8CIhBa9CigoGE">
+          <div className="maps__holder">
+
+
+
+
             <GoogleMap
               id="dashboard-map"
               mapContainerStyle={containerStyle}
@@ -147,35 +168,35 @@ export default function Dashboard() {
               zoom={10}
               options={options}
             >
-              
+
               {/* Child components, such as markers, info windows, etc. */
-              markers && markers.map((marker,index) => <Marker 
-              key = {index}
-              position = {{lat: marker.lat,lng: marker.lng}}
-              icon ={{
-                url: `bolt${marker.powerLevel}.svg`,
-                scaledSize: new window.google.maps.Size(30,30),
-                origin: new window.google.maps.Point(0,0),
-                anchor: new window.google.maps.Point(10,10)
-              }}
-              onClick = {() => {
-                setSelected(marker)
-              }}
-              />)
-              
+                markers && markers.map((marker, index) => <Marker
+                  key={index}
+                  position={{ lat: marker.lat, lng: marker.lng }}
+                  icon={{
+                    url: `bolt${marker.powerLevel}.svg`,
+                    scaledSize: new window.google.maps.Size(30, 30),
+                    origin: new window.google.maps.Point(0, 0),
+                    anchor: new window.google.maps.Point(10, 10)
+                  }}
+                  onClick={() => {
+                    setSelected(marker)
+                  }}
+                />)
+
               } {
                 selected &&
-                <InfoWindow 
-                position ={{lat: selected.lat, lng: selected.lng}}
-                onCloseClick={() => setSelected(null)}
+                <InfoWindow
+                  position={{ lat: selected.lat, lng: selected.lng }}
+                  onCloseClick={() => setSelected(null)}
                 >
                   <div>
                     <h2>{selected.name}</h2>
                     <p>Power level: {selected.powerLevel}</p>
                   </div>
                 </InfoWindow>}
-              
-              <DirectionsService 
+
+              <DirectionsService
                 options={{
                   destination: values.destination,
                   origin: values.origin,
@@ -184,13 +205,23 @@ export default function Dashboard() {
                 callback={directionsCallback}
 
               />
-              <DirectionsRenderer 
-                options={{directions: values.response}}
+              <DirectionsRenderer
+                options={{ directions: values.response }}
               />
+
+
+
+
             </GoogleMap>
-          </LoadScript>
+
+
+
+
+
+          </div>
+
         </div>
-      </div>
+      </LoadScript>
     </>
   );
 }
