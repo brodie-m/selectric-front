@@ -98,7 +98,7 @@ export default function Dashboard() {
         observer.observe(title)
     })
     async function fetchChargePoints() {
-
+      if (!values.response) {return}
       const polyline = values.response && values.response.routes[0].overview_polyline
       const distance= 1
       const maxResults = 40
