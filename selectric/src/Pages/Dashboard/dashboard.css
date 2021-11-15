@@ -25,7 +25,10 @@
 }
 
 .directions__holder {
+    flex: 1;
     height: 50%;
+    
+    align-items: flex-start;
     
     display: flex;
     flex-direction: column;

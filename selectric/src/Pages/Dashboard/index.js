@@ -12,6 +12,7 @@ import Profile from "../../Components/Profile";
 import MapOptions from "../../Components/MapOptions";
 import mapStyles from "./mapStyles";
 import Directions from "../../Components/Directions";
+import { letterSpacing } from "@mui/system";
 
 
 require("dotenv").config();
@@ -243,7 +244,7 @@ export default function Dashboard() {
             className="directions__holder anim"
             style={{ animationDelay: "-0.1s" }}
           >
-            <Directions />
+            <Directions route={values.response ? [values.response.routes[0].legs[0].distance.text, values.response.routes[0].legs[0].duration.text, values.response.routes[0].summary, values.response.routes[0].legs] : null}/>
           </div>
         </div>
         <div className="maps__holder">

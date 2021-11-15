@@ -1,0 +1,11 @@
+.property {
+    font-family: var(--font-family);
+    font-weight: 500;
+    line-height: 30px;
+    height: 50px;
+    font-size: 25px;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+    
+    margin-left: 10px;
+}
