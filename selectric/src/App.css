@@ -87,7 +87,7 @@ body {
 }
 
 .animate {
-  animation: reveal-left calc(1s + var(--anim-offset)) forwards;
+  animation: reveal-left calc(1s) forwards;
 
 }
 
