@@ -53,6 +53,8 @@ export default function Dashboard() {
     to: "",
   });
 
+  const [waypoints, setWaypoints] = useState([])
+
   const handleChange = (a, event) => {
     //console.log(event)//, event.target.value)
     console.log(event.target.value);
@@ -70,6 +72,7 @@ export default function Dashboard() {
       ...values,
       origin: endpoints.from,
       destination: endpoints.to,
+      waypoints: waypoints,
       travelMode: "DRIVING",
     });
     console.log(values);
@@ -81,14 +84,19 @@ export default function Dashboard() {
 
     console.log(selectedArray);
     setConnections(selectedArray);
-    console.log(connections);
-  };
+    setWaypoints(selectedArray.map((connection) => {
+      return {
+        location: new window.google.maps.LatLng(connection.lat, connection.lng),
+      }}))
+      handleSubmit()}
+    
+    
 
-  const waypoints = connections.map((connection) => {
-    return {
-      location: new window.google.maps.LatLng(connection.lat, connection.lng),
-    };
-  });
+  // const waypoints = connections.map((connection) => {
+  //   return {
+  //     location: new window.google.maps.LatLng(connection.lat, connection.lng),
+  //   };
+  // });
 
   const [values, setValues] = useState({
     //origin: 'London',
