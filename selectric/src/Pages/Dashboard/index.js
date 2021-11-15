@@ -12,12 +12,14 @@ require("dotenv").config();
 export default function Dashboard() {
   const [selected, setSelected] = useState(false)
   const [markers, setMarkers] = useState([])
-  const handleChange = (prop) => (event) => {
-    console.log(event, event.target.value)
-    setValues({ ...values, [prop]: event.target.value });
-  };
 
-  function directionsCallback (response) {
+  
+  // const handleChange = (prop) => (event) => {
+  //   console.log(event, event.target.value)
+  //   setValues({ ...values, [prop]: event.target.value });
+  // };
+
+  function directionsCallback(response) {
     console.log(response)
 
     if (response !== null) {
@@ -33,9 +35,35 @@ export default function Dashboard() {
     }
   }
 
+
+  const [endpoints, setEndpoints] = useState({
+    from: "",
+    to: "",
+  });
+
+  const handleChange = (a, event) => {
+    //console.log(event)//, event.target.value)
+    console.log(event.target.value)
+    console.log(a)
+    console.log(endpoints)
+    setEndpoints({ ...endpoints, [a]: event.target.value });
+    console.log(endpoints)
+  };
+
+
+  function handleSubmit(event) {
+    console.log(values)
+    console.log(event)
+    console.log(endpoints)
+    setValues({ ...values, origin: endpoints.from, destination: endpoints.to, travelMode: 'DRIVING' })
+    console.log(values)
+  }
+
   const [values, setValues] = useState({
-    origin: 'London',
-    destination: 'Edinburgh',
+    //origin: 'London',
+    //destination: 'Edinburgh',
+    origin: '',
+    destination: '',
     travelMode: 'DRIVING',
     response: null,
   })
@@ -104,7 +132,7 @@ export default function Dashboard() {
             <Profile />
           </div>
           <div className="options__holder anim" style={{animationDelay: '-0.2s'}}>
-            <MapOptions handleChange={handleChange}/>
+            <MapOptions handleSubmit={handleSubmit} handleChange={handleChange} values={values} setValues={setValues} />
           </div>
           <div className="directions__holder anim"  style={{animationDelay: '-0.1s'}}>
             <Directions />
