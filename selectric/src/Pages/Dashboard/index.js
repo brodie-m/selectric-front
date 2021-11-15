@@ -83,6 +83,11 @@ export default function Dashboard() {
     disableDefaultUI: true,
     zoomControl: true
   };
+
+  const infoWindowOptions = {
+    styles: mapStyles
+  }
+
   useLayoutEffect(() => {
     
     const titles = document.querySelectorAll('.anim')
@@ -107,6 +112,7 @@ export default function Dashboard() {
       const result = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&distance=${distance}&polyline=${polyline}&maxresults=${maxResults}&key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`)
       const data = await result.json()
       console.log(data)
+      data.forEach(point => console.log(point.UsageType))
       const markers = data.map(point => {
         return {
           "name": point.AddressInfo.Title,
@@ -181,19 +187,23 @@ export default function Dashboard() {
               />)
               
               } {
-                selected &&
+                selected && 
+                <div className = 'maps__infoWindow'>
                 <InfoWindow 
+                
                 position ={{lat: selected.lat, lng: selected.lng}}
                 onCloseClick={() => setSelected(null)}
                 >
                   <div>
-                    <h2>{selected.name}</h2>
-                    <h3>Cost: {selected.usageCost ? selected.usageCost : 'not specified'}</h3>
+                    <h1 className = 'gradient__text'>{selected.name}</h1>
+                    <h4>Cost: {selected.usageCost ? selected.usageCost : 'not specified'}</h4>
+                    <h4>Payment info: {selected.usageType.Title}</h4>
                     {selected.usageType.IsMembershipRequired ? <h4>Membership required</h4> : ''}
+                    <br/>
                     {selected.connections.map((connection, index) => (
 
                       <ul key={index}>
-                    <h2>Connection #{index +1}</h2>
+                    <h3>Connection #{index +1}</h3>
                     <li>Power: {connection.power} kW </li>
                     <li>Operational: {connection.statusType.IsOperational ? 'true' : 'false'}</li>
                     <li></li>
@@ -201,7 +211,7 @@ export default function Dashboard() {
                     
                     ))}
                   </div>
-                </InfoWindow>}
+                </InfoWindow></div>}
               
               <DirectionsService 
                 options={{
