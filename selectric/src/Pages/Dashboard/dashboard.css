@@ -36,3 +36,11 @@
     flex-direction: row;
     justify-content: center;
 }
+
+.maps__infoWindow {
+    background-color: red;
+}
+
+.places__marker {
+    stroke: white;
+}
