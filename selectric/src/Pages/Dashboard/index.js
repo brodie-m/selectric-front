@@ -228,13 +228,18 @@ export default function Dashboard() {
               
               } 
               {places ? places.map((place,index) => <Marker 
+              className = "places__marker"
               key = {place.id}
               position = {{lat: place.lat,lng: place.lng}}
               icon ={{
+                backgroundColor: place.icon_background_color,
                 url: place.icon,
                 scaledSize: new window.google.maps.Size(30,30),
                 origin: new window.google.maps.Point(0,0),
                 anchor: new window.google.maps.Point(10,10)
+              }}
+              options={{
+                styles: {backgroundColor: place.icon_background_color}
               }}
               />
               )
