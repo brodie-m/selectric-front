@@ -204,7 +204,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-        </div>
+        
         <div className="maps__holder">
           
 
@@ -325,7 +325,7 @@ export default function Dashboard() {
             </GoogleMap>
 
           
-
+                </div>
         </div>
       
     </>
