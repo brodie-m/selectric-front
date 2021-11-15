@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { DirectionsRenderer, DirectionsService, GoogleMap, InfoWindow, LoadScript, Marker } from "@react-google-maps/api";
+import { DirectionsRenderer, DirectionsService, GoogleMap, InfoWindow, LoadScript, Marker, useLoadScript } from "@react-google-maps/api";
 import { Container } from "@mui/material";
 import NavBar from "../../Components/NavBar";
 import "./dashboard.css";
@@ -10,6 +10,14 @@ import Directions from "../../Components/Directions";
 require("dotenv").config();
 const zoom = 10
 export default function Dashboard() {
+
+  const libraries=['places']
+
+  const {isLoaded, loadError} = useLoadScript({
+    googleMapsApiKey: "AIzaSyCMnp0NR1KzbU5BYQP_MY8CIhBa9CigoGE",
+    libraries
+  })
+
   const [selected, setSelected] = useState(false)
   const [markers, setMarkers] = useState([])
 
@@ -145,7 +153,7 @@ export default function Dashboard() {
     };
 }, [values.response])
   
-  return (
+  return ( isLoaded? 
     <>
       <NavBar />
       <div className="maps__container">
@@ -161,7 +169,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="maps__holder">
-          <LoadScript googleMapsApiKey="AIzaSyCMnp0NR1KzbU5BYQP_MY8CIhBa9CigoGE">
+          
             <GoogleMap
               id="dashboard-map"
               mapContainerStyle={containerStyle}
@@ -226,9 +234,9 @@ export default function Dashboard() {
                 options={{directions: values.response, zoom: zoom}}
               />
             </GoogleMap>
-          </LoadScript>
+          
         </div>
       </div>
     </>
-  );
+  : 'loading');
 }
