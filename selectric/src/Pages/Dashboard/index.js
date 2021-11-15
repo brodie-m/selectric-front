@@ -190,7 +190,7 @@ export default function Dashboard() {
 
     <>
       <NavBar />
-      <LoadScript googleMapsApiKey="AIzaSyAkT9l74nNgW3KmQ6nmiLJ1V0h4SuCE5AQ" libraries={["places"]} >
+      
         <div className="maps__container">
           <div className="info__holder">
             <div className="profile__holder anim" style={{ animationDelay: '-0.3s' }}>
@@ -327,7 +327,7 @@ export default function Dashboard() {
           
 
         </div>
-      </LoadScript>
+      
     </>
   : 'loading');
 }
