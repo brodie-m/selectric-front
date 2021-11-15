@@ -1,0 +1,34 @@
+.profile__holder {
+    padding: 1.6rem 1.2rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.names__holder {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile__name {
+    font-family: var(--font-family);
+    font-weight: 800;
+    line-height: 30px;
+    height: 50px;
+    font-size: 40px;
+    letter-spacing: -0.04em;
+    color: white;
+    
+    
+}
+
+.car__name {
+    font-family: var(--font-family);
+    font-weight: 500;
+    line-height: 30px;
+    height: 50px;
+    font-size: 25px;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+    
+    margin-left: 10px;
+}

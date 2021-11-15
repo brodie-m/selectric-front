@@ -2,6 +2,7 @@ import './App.css';
 import * as React from 'react';
 import Landing from './Pages/Landing';
 import Dashboard from './Pages/Dashboard';
+import ProfilePage from './Pages/ProfilePage';
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,6 +24,9 @@ function App() {
     <Route path = '/dashboard'>
   <Dashboard/>
       </Route>
+    <Route path = '/profile'>
+      <ProfilePage/>
+    </Route>
       </Switch>
   </Router>
 

@@ -45,6 +45,9 @@ export default function NavBar() {
         <p>
           <a href="">About</a>
         </p>
+        <p>
+          <a href="">Profile</a>
+        </p>
       </div>
       <div className="selectric__navbar-sign">
         <Button
