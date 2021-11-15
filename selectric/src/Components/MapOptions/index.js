@@ -18,6 +18,10 @@ export default function MapOptions(props) {
   const handleChange = props.handleChange;
   const handleSubmit = props.handleSubmit;
 
+  const handleGo = props.handleGo;
+  
+
+
   const [searchBox, setSearchBox] = useState(null);
   const onPlacesChanged = () => {
     let place = searchBox.getPlaces()[0].formatted_address;
@@ -51,6 +55,7 @@ export default function MapOptions(props) {
   // }
 
   //const onPlacesChanged = () => console.log(searchBox);
+
 
 
   return (
@@ -121,7 +126,7 @@ export default function MapOptions(props) {
         }}
         variant="contained"
         type="submit"
-        onClick={(event) => handleSubmit(event)}
+        onClick={(event) => handleGo(event)}
       >
         Go
       </Button>
