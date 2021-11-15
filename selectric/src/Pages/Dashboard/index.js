@@ -29,7 +29,29 @@ export default function Dashboard() {
   const [selected, setSelected] = useState(false);
   const [markers, setMarkers] = useState([]);
   const [connections, setConnections] = useState([]);
+  const [userData, setUserData] = useState(null)
+
+
   const mapRef = useRef()
+
+
+  async function fetchUserData() {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token':token
+        }
+    }
+    const result = await fetch(`https://selectric.herokuapp.com/user`, options)
+    
+    const data = await result.json()
+    setUserData(data)
+    
+
+  }
+
+
   const onMapLoad = useCallback(
     (map) => {
       mapRef.current = map
@@ -57,6 +79,8 @@ export default function Dashboard() {
       }
     }
   }
+  fetchUserData()
+
 
   const [endpoints, setEndpoints] = useState({
     from: "",
@@ -211,6 +235,7 @@ export default function Dashboard() {
         };
       });
       setMarkers(markers);
+      console.log("checking type ", markers[0] )
     }
     fetchChargePoints();
     return () => {};
@@ -225,7 +250,7 @@ export default function Dashboard() {
             className="profile__holder anim"
             style={{ animationDelay: "-0.3s" }}
           >
-            <Profile />
+            <Profile userData={userData} />
           </div>
           <div
             className="options__holder anim"
@@ -341,6 +366,8 @@ export default function Dashboard() {
                       <ul key={index}>
                         <h3>Connection #{index + 1}</h3>
                         <li>Power: {connection.power} kW </li>
+                        <li>Connector Type: {connection.connectionType.Title}</li>
+                        
                         <li>
                           Operational:{" "}
                           {connection.statusType.IsOperational
