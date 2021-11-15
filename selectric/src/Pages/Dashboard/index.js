@@ -253,6 +253,7 @@ export default function Dashboard() {
             center={center}
             zoom={12}
             options={options}
+            onLoad={onMapLoad}
           >
             {
               /* Child components, such as markers, info windows, etc. */
@@ -269,12 +270,51 @@ export default function Dashboard() {
                       origin: new window.google.maps.Point(0, 0),
                       anchor: new window.google.maps.Point(10, 10),
                     }}
-                    onClick={() => {
-                      setSelected(marker);
+                    onClick = { async () => {
+                      console.log(marker)
+                      setSelected(marker)
+                      
+                      let request = {
+                        location: new window.google.maps.LatLng(marker.lat,marker.lng),
+                        radius: 1604,
+                      }
+                      service.nearbySearch(request, (results, status) => {
+                        
+                        if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
+                          setPlaces(results.map((place)=> {return {
+                              ...place, lat: place.geometry.location.lat(), lng:place.geometry.location.lng()
+                          }}));
+                        }
+                        console.log(places)
+                      });
                     }}
-                  />
-                ))
-            }{" "}
+                    
+                    
+                    />))}
+                    
+                     
+                    {places ? places.map((place,index) => <Marker 
+                    className = "places__marker"
+                    key = {place.id}
+                    position = {{lat: place.lat,lng: place.lng}}
+                    icon ={{
+                      backgroundColor: place.icon_background_color,
+                      url: place.icon,
+                      scaledSize: new window.google.maps.Size(30,30),
+                      origin: new window.google.maps.Point(0,0),
+                      anchor: new window.google.maps.Point(10,10)
+                    }}
+                    options={{
+                      styles: {backgroundColor: place.icon_background_color}
+                    }}
+                    />
+                    )
+                    
+                    
+                    
+                    
+                    
+                    : <h1>NO PLACES</h1>}
             {selected && (
               <div className="maps__infoWindow">
                 <InfoWindow
