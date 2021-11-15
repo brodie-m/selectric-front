@@ -8,7 +8,7 @@ import MapOptions from "../../Components/MapOptions";
 import mapStyles from "./mapStyles";
 import Directions from "../../Components/Directions";
 require("dotenv").config();
-
+const zoom = 10
 export default function Dashboard() {
   const [selected, setSelected] = useState(false)
   const [markers, setMarkers] = useState([])
@@ -112,7 +112,23 @@ export default function Dashboard() {
           "name": point.AddressInfo.Title,
           "lat": point.AddressInfo.Latitude,
           "lng": point.AddressInfo.Longitude,
-          "powerLevel": point.Connections[0].LevelID
+          "powerLevel": point.Connections[0].LevelID,
+          "connections": point.Connections.map((connection) => {
+          
+
+            return {
+              connectionType: connection.ConnectionType,
+              power: connection.PowerKW,
+              statusType: connection.StatusType,
+              
+            }
+
+          }),
+          "usageCost": point.UsageCost,
+          "usageType": point.UsageType,
+          "operational": point.Connections.filter((connection) => {
+            return connection.StatusType.IsOperational
+          }).length ? true : false
         }
       })
       setMarkers(markers)
@@ -144,7 +160,7 @@ export default function Dashboard() {
               id="dashboard-map"
               mapContainerStyle={containerStyle}
               center={center}
-              zoom={10}
+              zoom={12}
               options={options}
             >
               
@@ -153,12 +169,13 @@ export default function Dashboard() {
               key = {index}
               position = {{lat: marker.lat,lng: marker.lng}}
               icon ={{
-                url: `bolt${marker.powerLevel}.svg`,
+                url: marker.operational ? `bolt${marker.powerLevel}.svg` : `bad-bolt.svg`,
                 scaledSize: new window.google.maps.Size(30,30),
                 origin: new window.google.maps.Point(0,0),
                 anchor: new window.google.maps.Point(10,10)
               }}
               onClick = {() => {
+                console.log(marker)
                 setSelected(marker)
               }}
               />)
@@ -171,7 +188,18 @@ export default function Dashboard() {
                 >
                   <div>
                     <h2>{selected.name}</h2>
-                    <p>Power level: {selected.powerLevel}</p>
+                    <h3>Cost: {selected.usageCost ? selected.usageCost : 'not specified'}</h3>
+                    {selected.usageType.IsMembershipRequired ? <h4>Membership required</h4> : ''}
+                    {selected.connections.map((connection, index) => (
+
+                      <ul key={index}>
+                    <h2>Connection #{index +1}</h2>
+                    <li>Power: {connection.power} kW </li>
+                    <li>Operational: {connection.statusType.IsOperational ? 'true' : 'false'}</li>
+                    <li></li>
+                      </ul>
+                    
+                    ))}
                   </div>
                 </InfoWindow>}
               
@@ -185,7 +213,7 @@ export default function Dashboard() {
 
               />
               <DirectionsRenderer 
-                options={{directions: values.response}}
+                options={{directions: values.response, zoom: zoom}}
               />
             </GoogleMap>
           </LoadScript>
