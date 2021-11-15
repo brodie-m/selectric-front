@@ -1,14 +1,4 @@
 
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import {
-  DirectionsRenderer,
-  DirectionsService,
-  GoogleMap,
-  InfoWindow,
-  LoadScript,
-  Marker,
-  useLoadScript,
-} from "@react-google-maps/api";
 
 
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -35,11 +25,11 @@ export default function Dashboard() {
     googleMapsApiKey: "AIzaSyCMnp0NR1KzbU5BYQP_MY8CIhBa9CigoGE",
     libraries,
   });
-
+  const [service, setService] = useState(null)
   const [selected, setSelected] = useState(false);
   const [markers, setMarkers] = useState([]);
   const [connections, setConnections] = useState([]);
-  const [selected, setSelected] = useState(false)
+  const mapRef = useRef()
   const onMapLoad = useCallback(
     (map) => {
       mapRef.current = map
@@ -343,7 +333,7 @@ export default function Dashboard() {
           </GoogleMap>
 
         </div>
-      
+      </div>
     </>
   ) : (
     "loading"
