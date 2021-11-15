@@ -64,10 +64,18 @@ export default function Dashboard() {
     console.log(endpoints);
   };
 
+  function handleGo() {
+    setWaypoints([])
+    setValues({
+      ...values,
+      origin: endpoints.from,
+      destination: endpoints.to,
+      travelMode: "DRIVING",
+    });
+  }
+
   function handleSubmit(event) {
-    console.log(values);
-    console.log(event);
-    console.log(endpoints);
+    
     setValues({
       ...values,
       origin: endpoints.from,
@@ -88,7 +96,7 @@ export default function Dashboard() {
       return {
         location: new window.google.maps.LatLng(connection.lat, connection.lng),
       }}))
-      handleSubmit()}
+    handleSubmit()}
     
     
 
@@ -202,6 +210,7 @@ export default function Dashboard() {
           >
             <MapOptions
               handleSubmit={handleSubmit}
+              handleGo={handleGo}
               handleChange={handleChange}
               values={values}
               setValues={setValues}

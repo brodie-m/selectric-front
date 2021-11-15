@@ -14,6 +14,7 @@ export default function MapOptions(props) {
 
   const handleChange = props.handleChange;
   const handleSubmit = props.handleSubmit;
+  const handleGo = props.handleGo;
   
   return (
     <div className='options__container'>
@@ -58,7 +59,7 @@ export default function MapOptions(props) {
         }}
         variant="contained"
         type="submit"
-        onClick={(event) => handleSubmit(event)}
+        onClick={(event) => handleGo(event)}
       >
         Go
       </Button>
