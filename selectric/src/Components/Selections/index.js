@@ -1,5 +1,4 @@
 import { Avatar, FormControl, FormGroup, InputLabel, OutlinedInput, Autocomplete, TextField, Button } from '@mui/material'
-import e from 'cors';
 import React, { useLayoutEffect, useState } from 'react'
 import './selections.css'
 export default function Selections() {
@@ -100,7 +99,7 @@ useLayoutEffect(()=> {
         updates: [
             {name: "username", value: values.name},
             {name: "profile_image", value: values.profile_image},
-            {name: "brand", value: {'brand': values.carObject.Brand, 'model': values.carObject.Model, 'plugType': values.carObject.PlugType}}
+            {name: "cars", value: {'brand': values.carObject.Brand, 'model': values.carObject.Model, 'plugType': values.carObject.PlugType}}
             ]
         
       }),
