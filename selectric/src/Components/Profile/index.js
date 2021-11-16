@@ -1,31 +1,10 @@
 import { Avatar } from '@mui/material'
 import React, { useLayoutEffect, useState } from 'react'
 import './profile.css'
+
 export default function Profile() {
     const [userData, setUserData] = useState(null)
-    useLayoutEffect(()=> {
-    const token = localStorage.getItem('token')
-    console.log(token)
-    async function fetchUserData() {
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token':token
-            }
-        }
-        const result = await fetch(`https://selectric.herokuapp.com/user`, options)
-        
-        const data = await result.json()
-        setUserData(data)
-        console.log(userData)
     
-      }
-      // fetchUserData()
-      return () => {
-          
-      };
-  }, [])
 
   function stringToColor(string) {
     let hash = 0;
@@ -57,23 +36,28 @@ export default function Profile() {
   }
   
 
+export default function Profile( props) {
+
+
     return (
         <div className='profile__holder'>
-                {userData ?
+                {props.userData ?
                 
-                userData.avatar ? 
+                props.userData.avatar ? 
                 
                 (<Avatar src={'bolt1.svg'} sx={{height:'70px',width:'70px', boxShadow: 3}}/>) 
                 : 
-                (<Avatar {...stringAvatar(userData.username)} sx={{height: '70px',width:'70px', boxShadow: 3}}/>) : ''}
+                (<Avatar {...stringAvatar(props.userData.username)} sx={{height: '70px',width:'70px', boxShadow: 3}}/>) : ''}
                    
                 
             
            
             
             <div className='names__holder'>
-                <h2 className='profile__name'>{userData && userData.username}</h2>
-                <h3 className = 'car__name'>Tesla Model S</h3>
+
+            <h2 className='profile__name'>{props.userData && props.userData.username}</h2>
+            <h3 className = 'car__name'>{props.userData && props.userData.selectedCar}</h3>
+
             </div>
             
         </div>
