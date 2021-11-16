@@ -5,6 +5,23 @@
     justify-content: center;
 }
 
+.profile__holder label {
+    background: transparent;
+}
+
+.selections__submit {
+    width: 100px;
+}
+
+@media only screen and (max-width: 660px) {
+    .profile__holder {
+        flex-direction: column;
+    }
+    .selections__submit {
+        width: 90%;
+    }
+}
+
 .names__holder {
     display: flex;
     flex-direction: column;
