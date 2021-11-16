@@ -3,8 +3,8 @@ import React, { useLayoutEffect, useState } from 'react'
 import './selections.css'
 export default function Selections() {
     const [values, setValues] = useState({
-    avatar: "",
-    username: "",
+    profile_image: "",
+    name: "",
     cartype: "",
   });
 
@@ -65,7 +65,8 @@ useLayoutEffect(()=> {
     console.log('submit in progress')
     console.log(values)
     const options = {
-      method: "PATCH", 
+      method: "PATCH",
+       
       headers: {
         "Content-Type": "application/json",
       },
@@ -81,13 +82,23 @@ return (
         <FormGroup>
         <div className='profile__holder'>
             <Avatar alt='profile picture' sx={{height: '150px',width:'150px'}}/>
+            <FormControl sx={{ m: 1, width: 'auto' }} variant="outlined">
+                <InputLabel htmlFor="outlined-image">Image Upload</InputLabel>
+                <OutlinedInput
+                    id="outlined-image"
+                    value={values.profile_image}
+                    onChange={handleChange("profile_image")}
+                    label="Image Upload"
+                    > 
+                </OutlinedInput>
+                </FormControl>
             <div className='names__holder'>
                 <FormControl sx={{ m: 1, width: 'auto' }} variant="outlined">
                 <InputLabel htmlFor="outlined-username">Username</InputLabel>
                 <OutlinedInput
                     id="outlined-username"
                     value={values.username}
-                    onChange={handleChange("username")}
+                    onChange={handleChange("name")}
                     label="Username"
                     > 
                 </OutlinedInput>
