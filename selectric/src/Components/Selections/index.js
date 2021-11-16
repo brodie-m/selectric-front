@@ -107,6 +107,9 @@ useLayoutEffect(()=> {
     }
     console.log(options)
     const result = await fetch(`https://selectric.herokuapp.com/user`, options)
+    if (result.status !== 200) {
+        window.location.href='https://selectric.netlify.app/dashboard'
+    }
 };
 
 
