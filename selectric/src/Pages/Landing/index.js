@@ -13,8 +13,8 @@ export default function Landing() {
 
   return (
       <>
-      <NavBar/>
-      <Header/>
+      <NavBar />
+      <Header handleOpen={handleOpen} handleClose={handleClose}/>
     </>
     
   );

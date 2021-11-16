@@ -25,7 +25,10 @@
 }
 
 .directions__holder {
+    flex: 1;
     height: 50%;
+    
+    align-items: flex-start;
     
     display: flex;
     flex-direction: column;
@@ -43,4 +46,38 @@
 
 .places__marker {
     stroke: white;
+}
+
+.pac_container, .pac-item {
+    color: white;
+    background-color: var(--color-footer) !important;
+    border: 1px solid transparent;
+}
+
+.pac-cion {
+    background: var(--color-text);
+}
+
+.pac-item-query {
+    color: var(--color-text)
+}
+.pac-item:hover {
+    background-color: var(--color-bg)
+}
+.pac-matched {
+    color: #ff4820;
+}
+.pac-logo {
+    background-color: var(--color-footer);
+    
+    
+}
+
+.pac-logo::after {
+    background-image: url('../../assets/logo-blue.svg');
+    
+}
+
+.pac-logo a {
+    color: transparent;
 }

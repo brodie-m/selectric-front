@@ -13,10 +13,10 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import '../Login/Login.css'
 import logo from '../../assets/logo.svg'
-export default function Register() {
+export default function Register(props) {
     const [values, setValues] = useState({
         username: "",
-        email: "",
+        email: props.email || "",
         password: "",
         showPassword: false,
       });
