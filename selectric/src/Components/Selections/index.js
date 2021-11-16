@@ -76,21 +76,23 @@ useLayoutEffect(()=> {
     }
 };
 
+
 return (
         <>
         <form onSubmit={handleSubmit}>
         <FormGroup>
         <div className='profile__holder'>
-            <Avatar alt='profile picture' sx={{height: '150px',width:'150px'}}/>
             <FormControl sx={{ m: 1, width: 'auto' }} variant="outlined">
-                <InputLabel htmlFor="outlined-image">Image Upload</InputLabel>
-                <OutlinedInput
-                    id="outlined-image"
-                    value={values.profile_image}
-                    onChange={handleChange("profile_image")}
-                    label="Image Upload"
-                    > 
-                </OutlinedInput>
+                <Button
+                    variant="contained"
+                    component="label"
+                    >
+                    <Avatar alt='profile picture' sx={{height: '150px',width:'150px'}}/>
+                    <input
+                        type="file"
+                        hidden
+                    />
+                    </Button>
                 </FormControl>
             <div className='names__holder'>
                 <FormControl sx={{ m: 1, width: 'auto' }} variant="outlined">
@@ -110,6 +112,7 @@ return (
                         return `${car.Brand}${car.Model}`
                     })}
                     sx={{ width: 300 }}
+                    onChange={handleChange("cartype")}
                     renderInput={(params) => <TextField {...params} label="Car Type" />}
                     />
             </div> 
