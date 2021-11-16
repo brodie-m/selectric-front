@@ -54,9 +54,15 @@
 }
 
 .selectric__mobile-menu button{
-    margin-top: -20px;
+    margin-top: -45px;
     background: #ff4820;
    
+}
+
+#mobilemenu-actions button {
+    margin: 15px;
+    transform: scale(1.5);
+    z-index: 20;
 }
 
 
@@ -71,5 +77,12 @@
 @media only screen and (max-width: 800px) {
     .selectric__navbar-links_container p{
         display: none!important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .selectric__navbar {
+        padding : 1rem;
+        margin: 0rem 1rem;
     }
 }
