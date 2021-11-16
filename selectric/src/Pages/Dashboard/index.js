@@ -170,7 +170,7 @@ export default function Dashboard() {
   const containerStyle = {
     minWidth: '500px',
     width: "40vw",
-   
+
     minHeight: '500px',
     height: "40vw",
   };
@@ -227,7 +227,7 @@ export default function Dashboard() {
       const distance = 1;
       const maxResults = 500;
       console.log(userData.connectionType)
-      let connectionID
+      let connectionID = ''
       if (userData.connectionType === 'Type 2 (Socket Only)') {
         connectionID = '25'
         //console.log(connectionID)
@@ -469,8 +469,9 @@ export default function Dashboard() {
 
                       places.map((place, index) => (
                         <ul key={index}>
-                          <li> {place.name} <Rating readOnly value={place.rating} precision={0.5} size='small' /> {place.user_ratings_total} ratings</li>
-                          
+                          <li> {place.name} <Rating readOnly value={place.rating} precision={0.5} size='small' />
+                            {place.user_ratings_total} {place.user_ratings_total ? 'ratings' : ''}</li>
+
                         </ul>
                       ))
                       : <h1></h1>}
