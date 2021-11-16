@@ -50,13 +50,13 @@ export default function NavBar(props) {
       
       <div className="selectric__navbar-links_container">
         <p>
-          <a href="">Home</a>
+          <a href="https://selectric.netlify.app/">Home</a>
         </p>
         <p>
-          <a href="">About</a>
+          <a href="https://selectric.netlify.app/">About</a>
         </p>
         <p>
-          <a href="">Profile</a>
+          <a href="https://selectric.netlify.app/profile">Profile</a>
         </p>
       </div>
       <div className="selectric__navbar-sign">
