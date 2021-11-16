@@ -47,3 +47,23 @@
 .places__marker {
     stroke: white;
 }
+
+.pac_container, .pac-item {
+    color: white;
+    background-color: var(--color-footer) !important;
+    border: 1px solid transparent;
+}
+
+.pac-cion {
+    background: var(--color-text);
+}
+
+.pac-item-query {
+    color: var(--color-text)
+}
+.pac-item:hover {
+    background-color: var(--color-bg)
+}
+.pac-matched {
+    color: #ff4820;
+}
