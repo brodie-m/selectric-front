@@ -96,3 +96,16 @@
 .pac-logo a {
     color: transparent;
 }
+
+#addWayPointButton {
+  background-color: #7b0992; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  /* text-decoration: none;
+  display: inline-block; */
+  font-size: 16px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
