@@ -2,9 +2,6 @@ import { Avatar } from '@mui/material'
 import React, { useLayoutEffect, useState } from 'react'
 import './profile.css'
 
-export default function Profile() {
-    const [userData, setUserData] = useState(null)
-    
 
   function stringToColor(string) {
     let hash = 0;

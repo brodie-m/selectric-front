@@ -246,8 +246,7 @@ export default function Dashboard() {
 
       const markers = data.map((point) => {
         // console.log('HEREE')
-        console.log(userData.connectionType)
-        console.log(point.Connections)
+       
         // console.log('HEREE')
         //  if (userData.connectionType && point.Connections[0].ConnectionType.Title == userData.connectionType) {
         
@@ -265,7 +264,7 @@ export default function Dashboard() {
             name: point.AddressInfo.Title,
             lat: point.AddressInfo.Latitude,
             lng: point.AddressInfo.Longitude,
-            powerLevel: point.Connections[0].LevelID,
+            powerLevel: point.Connections[0] && point.Connections[0].LevelID,
             connections: point.Connections.map((connection) => {
 
               return {
