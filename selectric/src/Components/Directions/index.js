@@ -1,3 +1,4 @@
+import { Button } from '@mui/material'
 import React, { useState } from 'react'
 import './directions.css'
 export default function Directions(props) {
@@ -43,13 +44,15 @@ export default function Directions(props) {
         locations.forEach(location => {
             query += `${location.lat}+${location.lng}/`
         })
-        const result = start + query;
-        // setQuery(result)
-        console.log(result)
+        return start+query
     }
-    if (route) {
-        buildQuery(route[3])
+    
+    function handleClick(e) {
+        e.preventDefault();
+        const query = buildQuery(route[3])
+        window.location.href = query
     }
+
     return (
         <div className = 'property'>
             { route &&
@@ -61,7 +64,9 @@ export default function Directions(props) {
             <h4>{route[1]}</h4>
             <h3 className='gradient__text'>Summary: </h3>
             <h4>{route[2]}</h4>
-            {/* <h4><a href={query}>Take me there</a></h4> */}
+            <Button onClick={handleClick} sx={{ m: 1, px: 4, py: 1, color: 'white', backgroundColor: '#ff4820', '&:hover': {
+              backgroundColor: '#ff4820'
+          } }} variant='contained' type='submit'>Take me there</Button>
             </>
             }
         </div>
