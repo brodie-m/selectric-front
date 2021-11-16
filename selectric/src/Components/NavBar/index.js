@@ -5,6 +5,7 @@ import "./navbar.css";
 import Register from "../Register";
 import Login from "../Login";
 import logo from '../../assets/logo.svg'
+import MobileMenu from "../MobileMenu";
 export default function NavBar(props) {
   const isLoggedIn = props.isLoggedIn
   const token = localStorage.getItem('token')
@@ -49,6 +50,7 @@ export default function NavBar(props) {
         </div>
       
       <div className="selectric__navbar-links_container">
+        
         <p>
           <a href="">Home</a>
         </p>
@@ -58,7 +60,13 @@ export default function NavBar(props) {
         <p>
           <a href="">Profile</a>
         </p>
+        
+        <div className = 'selectric__mobile-menu'>
+
+        <MobileMenu />
+        </div>
       </div>
+      
       <div className="selectric__navbar-sign">
         {!isLoggedIn ? <><Button
           sx={{ m: 1, px: 4, py: 1, backgroundColor: 'transparent', color: 'white', '&:hover': {

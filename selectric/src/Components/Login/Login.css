@@ -5,6 +5,7 @@
     line-height: 43px;
     letter-spacing: -0.04em;
     width: 20vw;
+    min-width: 200px;
     margin-left: 1rem;
     margin-top: 1rem;
 }

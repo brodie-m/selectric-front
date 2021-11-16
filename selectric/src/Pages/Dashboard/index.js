@@ -168,7 +168,10 @@ export default function Dashboard() {
   });
 
   const containerStyle = {
+    minWidth: '500px',
     width: "40vw",
+   
+    minHeight: '500px',
     height: "40vw",
   };
 
