@@ -67,3 +67,17 @@
 .pac-matched {
     color: #ff4820;
 }
+.pac-logo {
+    background-color: var(--color-footer);
+    
+    
+}
+
+.pac-logo::after {
+    background-image: url('../../assets/logo-blue.svg');
+    
+}
+
+.pac-logo a {
+    color: transparent;
+}
