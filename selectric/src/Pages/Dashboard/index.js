@@ -43,6 +43,7 @@ export default function Dashboard() {
     lat: 51.5012,
     lng: -0.1354,
   })
+  
 
   // const handleChange = (prop) => (event) => {
   //   console.log(event, event.target.value)
@@ -50,7 +51,6 @@ export default function Dashboard() {
   // };
 
   function directionsCallback(response) {
-    console.log(response);
 
     if (response !== null) {
       if (response.status === "OK") {
@@ -71,15 +71,8 @@ export default function Dashboard() {
   const [waypoints, setWaypoints] = useState([])
 
   const handleChange = (a, event) => {
-    //console.log(event)//, event.target.value)
-
-    console.log('handle change ttiggerd')
-    console.log(event)
-  //  console.log(event.target.value)
-    console.log('this is a ' + a)
-    console.log( endpoints)
     setEndpoints({ ...endpoints, [a]: event });
-    console.log(endpoints)
+    
 
   };
 
@@ -102,7 +95,7 @@ export default function Dashboard() {
       waypoints: waypoints,
       travelMode: "DRIVING",
     });
-    console.log(values);
+    
   }
 
 
@@ -110,7 +103,7 @@ export default function Dashboard() {
     const selectedArray = [...connections];
     selectedArray.push(selected);
 
-    console.log(selectedArray);
+    
     setConnections(selectedArray);
     setWaypoints(selectedArray.map((connection) => {
       return {
@@ -198,8 +191,8 @@ export default function Dashboard() {
         `https://api.openchargemap.io/v3/poi/?output=json&distance=${distance}&polyline=${polyline}&maxresults=${maxResults}&key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`
       );
       const data = await result.json();
-      console.log(data);
-      data.forEach((point) => console.log(point.UsageType));
+      
+      
       const markers = data.map((point) => {
 
         return {
@@ -287,7 +280,7 @@ export default function Dashboard() {
                       anchor: new window.google.maps.Point(10, 10),
                     }}
                     onClick = { async () => {
-                      console.log(marker)
+                      
                       setSelected(marker)
                       
                       let request = {
@@ -301,7 +294,7 @@ export default function Dashboard() {
                               ...place, lat: place.geometry.location.lat(), lng:place.geometry.location.lng()
                           }}));
                         }
-                        console.log(places)
+                        
                       });
                     }}
                     
@@ -382,7 +375,10 @@ export default function Dashboard() {
                 travelMode: values.travelMode,
                 waypoints: waypoints,
               }}
-              callback={directionsCallback}
+              callback={(response) => {
+                
+                directionsCallback(response)
+              }}
             />
             <DirectionsRenderer
               options={{ map: mapRef.current, directions: values.response, zoom: mapRef.current && mapRef.current.getZoom(), center: mapRef.current && mapRef.current.getCenter(), preserveViewport: true}}

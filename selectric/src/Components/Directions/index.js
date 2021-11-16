@@ -3,7 +3,6 @@ import React, { useLayoutEffect, useState } from 'react'
 import './directions.css'
 export default function Directions(props) {
     const route = props.route
-    console.log(route)
     // const [query, setQuery] = useState('')
     const [distance, setDistance] = useState('')
     const [duration, setDuration] = useState('')
