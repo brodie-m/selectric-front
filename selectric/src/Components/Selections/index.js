@@ -100,7 +100,7 @@ useLayoutEffect(()=> {
         updates: [
             {name: "username", value: values.name},
             {name: "profile_image", value: values.profile_image},
-            {name: "brand", value: {'brand': values.carObject.Brand, 'model': values.carObject.Model, 'plugType': values.carObject.PlugType}}
+            {name: "cars", value: {'brand': values.carObject.Brand, 'model': values.carObject.Model, 'plugType': values.carObject.PlugType}}
             ]
         
       }),
@@ -117,6 +117,9 @@ return (
         <div className='profile__holder'>
             <FormControl sx={{ m: 1, width: 'auto' }} variant="outlined">
                 <Button
+                    sx={{m:1 , p:1, '&:hover': {
+                        background: 'transparent'
+                    }}}
                     variant="contained"
                     component="label"
                     >
@@ -129,7 +132,7 @@ return (
                     </Button>
                 </FormControl>
             <div className='names__holder'>
-                <FormControl sx={{ m: 1, width: 'auto' }} variant="outlined">
+                <FormControl sx={{ m: 1, width: '90%' }} variant="outlined">
                 <InputLabel htmlFor="outlined-username">Username</InputLabel>
                 <OutlinedInput
                     id="outlined-username"
@@ -146,14 +149,14 @@ return (
                     options={carData.map(car => {
                         return `${car.Brand}${car.Model}`
                     })}
-                    sx={{ width: 300 }}
+                    sx={{ m:1,width: '90%' }}
                     value={values.cartype}
                     onChange={handleCarChange}
                     isOptionEqualToValue={(option, value) => option.code === value}
                     renderInput={(params) => <TextField {...params} label="Car Type" />}
                     />
             </div> 
-            <Button sx={{ m: 1, px: 4, py: 1, color: 'white', backgroundColor: '#ff4820', '&:hover': {
+            <Button className = 'selections__submit' sx={{ m: 1, px: 4, py: 1, color: 'white', backgroundColor: '#ff4820', '&:hover': {
               backgroundColor: '#ff4820'
           } }} variant='contained' type='submit'>Submit</Button>
         </div>

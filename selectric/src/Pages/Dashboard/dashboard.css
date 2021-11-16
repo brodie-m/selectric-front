@@ -3,17 +3,10 @@
     
 }
 
-.info__holder {
-    
-    display: flex;
-    flex-direction: column;
-    width: 30vw;
-    
-}
 
 .profile__holder {
     height: 25%;
-    
+    margin-top: -5%;
    
 }
 
@@ -29,7 +22,7 @@
     height: 50%;
     
     align-items: flex-start;
-    
+    margin-top: 10%;
     display: flex;
     flex-direction: column;
 }
@@ -39,6 +32,28 @@
     flex-direction: row;
     justify-content: center;
 }
+.info__holder {
+    
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    
+}
+
+@media only screen and (max-width: 1000px) {
+    .maps__container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .info__holder {
+        flex-direction: row;
+        width: 80vw;
+        justify-content: space-aroun
+    }
+}
+
+
+
 
 .maps__infoWindow {
     background-color: red;

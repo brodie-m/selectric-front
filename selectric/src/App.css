@@ -26,6 +26,8 @@ body {
 
     /* global 92%+ browsers support */
     background:radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 100%);
+    min-width: 560px;
+    height: 100vh;
 
 }
 
@@ -68,7 +70,7 @@ body {
 
 @media screen and (max-width: 700px) {
   .section__padding {
-    padding: 4rem;
+    padding: 0rem 4rem;
   }
 
   .section__margin {
@@ -78,11 +80,11 @@ body {
 
 @media screen and (max-width: 550px) {
   .section__padding {
-    padding: 4rem 2rem;
+    padding: 0rem 2rem;
   }
 
   .section__margin {
-    margin: 4rem 2rem;
+    margin: 0rem 2rem;
   }  
 }
 
