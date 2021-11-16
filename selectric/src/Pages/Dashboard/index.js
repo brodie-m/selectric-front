@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from
 import { DirectionsRenderer, DirectionsService, GoogleMap, InfoWindow, LoadScript, Marker, useLoadScript, StandaloneSearchBox } from "@react-google-maps/api";
 
 
-import { Container } from "@mui/material";
+import { Container, Rating } from "@mui/material";
 import NavBar from "../../Components/NavBar";
 import "./dashboard.css";
 import Profile from "../../Components/Profile";
@@ -466,44 +466,19 @@ export default function Dashboard() {
 
                       places.map((place, index) => (
                         <ul key={index}>
-                          <li> {place.name}</li>
+                          <li> {place.name} <Rating readOnly value={place.rating} precision={0.5} size='small' /> {place.user_ratings_total} ratings</li>
+                          
                         </ul>
                       ))
-                      : <h1>NO PLACES</h1>}
+                      : <h1></h1>}
 
 
 
-                    {/* {places ? <p> there is a place </p> : <p> there is a place </p> }
-                     {places.map((place) => (
-                      <p> {place.name} </p>
-                     ) )}  */}
-
-
-
-
-                    {/* 
-                    {places.map((place) => (
-                      // <ul key={index}>
-                      //   {/* <h3>Connection #{index + 1}</h3>
-                      //   <li>Power: {connection.power} kW </li>
-                      //   <li>Connector Type: {connection.connectionType.Title}</li>
-
-                      //   <li>
-                      //     Operational:{" "}
-                      //     {connection.statusType.IsOperational
-                      //       ? "true"
-                      //       : "false"}
-                      //   </li>
-                      //   <li></li> */}
-                    {/* //   <li> {place.name}</li>
-                      // </ul>
-                      <p> {place.name} </p>
-                    ))}  */}
 
 
 
                     <button onClick={() => handleSelect(selected)} id='addWayPointButton'>
-                      Add to route
+                      Add charging point to route
                     </button>
                   </div>
 
