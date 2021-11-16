@@ -59,7 +59,7 @@ export default function Register(props) {
           setGoodLogin(true)
           const data = await result.json()
           localStorage.setItem('token',data.token)
-          window.location.href='./dashboard'
+          window.location.href='./profile'
     
       }
     return (

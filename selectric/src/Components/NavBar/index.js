@@ -55,6 +55,9 @@ export default function NavBar(props) {
         <p>
           <a href="">About</a>
         </p>
+        <p>
+          <a href="">Profile</a>
+        </p>
       </div>
       <div className="selectric__navbar-sign">
         {!isLoggedIn ? <><Button
