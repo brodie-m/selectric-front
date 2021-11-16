@@ -63,9 +63,9 @@ export default function Profile() {
                 
                 userData.avatar ? 
                 
-                (<Avatar src={'bolt1.svg'} sx={{height:'70px',width:'70px'}}/>) 
+                (<Avatar src={'bolt1.svg'} sx={{height:'70px',width:'70px', boxShadow: 3}}/>) 
                 : 
-                (<Avatar {...stringAvatar(userData.username)} sx={{height: '70px',width:'70px'}}/>) : ''}
+                (<Avatar {...stringAvatar(userData.username)} sx={{height: '70px',width:'70px', boxShadow: 3}}/>) : ''}
                    
                 
             

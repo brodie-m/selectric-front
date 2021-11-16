@@ -9,6 +9,7 @@ export default function Directions(props) {
     const [duration, setDuration] = useState('')
 
     useLayoutEffect(()=>{
+        if (!route) return;
         let distanceCount = 0
         let durationCount = 0
         route[3].forEach(leg => {
