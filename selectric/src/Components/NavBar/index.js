@@ -5,7 +5,10 @@ import "./navbar.css";
 import Register from "../Register";
 import Login from "../Login";
 import logo from '../../assets/logo.svg'
-export default function NavBar() {
+export default function NavBar(props) {
+  const isLoggedIn = props.isLoggedIn
+  const token = localStorage.getItem('token')
+  
   // const toggleDrawer = (anchor, open) => (event) => {
   //     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
   //       return;
@@ -21,6 +24,13 @@ export default function NavBar() {
             {menuList}
           </Drawer>
         </> */
+
+  function handleLogout(e) {
+    e.preventDefault();
+    console.log('clicked')
+    localStorage.removeItem('token')
+    window.location.href = '/'
+  }
 
   function handleClick(e) {
     e.preventDefault();
@@ -47,7 +57,7 @@ export default function NavBar() {
         </p>
       </div>
       <div className="selectric__navbar-sign">
-        <Button
+        {!isLoggedIn ? <><Button
           sx={{ m: 1, px: 4, py: 1, backgroundColor: 'transparent', color: 'white', '&:hover': {
             backgroundColor: '#ff4820' }}}
           variant="contained"
@@ -69,7 +79,15 @@ export default function NavBar() {
           }}
         >
           Register
-        </Button>
+        </Button></> : <Button
+          sx={{ m: 1, px: 4, py: 1, backgroundColor: '#ff4820', color: 'white', '&:hover': {
+              backgroundColor: '#ff4820'
+          } }}
+          variant="contained"
+          onClick={(e) => {
+            handleLogout(e);
+          }}
+        >Logout</Button>}
         </div>
         
       

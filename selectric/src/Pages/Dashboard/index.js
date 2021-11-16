@@ -219,7 +219,7 @@ export default function Dashboard() {
 
   return isLoaded ? (
     <>
-      <NavBar />
+      <NavBar isLoggedIn={true}/>
       <div className="maps__container">
         <div className="info__holder">
           <div
