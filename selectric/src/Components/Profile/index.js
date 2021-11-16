@@ -21,7 +21,7 @@ export default function Profile() {
         console.log(userData)
     
       }
-      fetchUserData()
+      // fetchUserData()
       return () => {
           
       };

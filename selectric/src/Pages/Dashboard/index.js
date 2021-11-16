@@ -17,7 +17,7 @@ import { letterSpacing } from "@mui/system";
 
 require("dotenv").config();
 
-const zoom = 10;
+
 const libraries = ["places"];
 export default function Dashboard() {
   
@@ -38,7 +38,11 @@ export default function Dashboard() {
     },
     [],
   )
-
+  const [zoom, setZoom] = useState(10)
+  const [center, setCenter] = useState({
+    lat: 51.5012,
+    lng: -0.1354,
+  })
 
   // const handleChange = (prop) => (event) => {
   //   console.log(event, event.target.value)
@@ -139,10 +143,10 @@ export default function Dashboard() {
     height: "40vw",
   };
 
-  const center = {
-    lat: 51.5012,
-    lng: -0.1354,
-  };
+  // const center = {
+  //   lat: 51.5012,
+  //   lng: -0.1354,
+  // };
 
   const options = {
     styles: mapStyles,
@@ -154,6 +158,15 @@ export default function Dashboard() {
     styles: mapStyles,
   };
 
+  function onZoomChanged() {
+    if (!mapRef.current) return
+    setZoom(mapRef.current.getZoom())
+  }
+
+  function onCenterChanged() {
+    if (!mapRef.current) return
+    setCenter(mapRef.current.getCenter())
+  }
   
   
   useLayoutEffect(() => {
@@ -252,9 +265,11 @@ export default function Dashboard() {
             id="dashboard-map"
             mapContainerStyle={containerStyle}
             center={center}
-            zoom={12}
+            zoom={zoom}
             options={options}
             onLoad={onMapLoad}
+            onZoomChanged={onZoomChanged}
+            onCenterChanged={onCenterChanged}
           >
             {
               /* Child components, such as markers, info windows, etc. */
@@ -351,6 +366,7 @@ export default function Dashboard() {
                         <li></li>
                       </ul>
                     ))}
+                    <h1>places information</h1>
                     <button onClick={() => handleSelect(selected)}>
                       Select
                     </button>
@@ -369,7 +385,7 @@ export default function Dashboard() {
               callback={directionsCallback}
             />
             <DirectionsRenderer
-              options={{ directions: values.response, zoom: zoom }}
+              options={{ map: mapRef.current, directions: values.response, zoom: mapRef.current && mapRef.current.getZoom(), center: mapRef.current && mapRef.current.getCenter(), preserveViewport: true}}
             />
           </GoogleMap>
 
