@@ -74,7 +74,7 @@ export default function Dashboard() {
     lat: 51.5012,
     lng: -0.1354,
   })
-  
+
 
   // const handleChange = (prop) => (event) => {
   //   console.log(event, event.target.value)
@@ -106,7 +106,7 @@ export default function Dashboard() {
   const handleChange = (a, event) => {
 
     setEndpoints({ ...endpoints, [a]: event });
-    
+
 
   };
 
@@ -129,7 +129,7 @@ export default function Dashboard() {
       waypoints: waypoints,
       travelMode: "DRIVING",
     });
-    
+
   }
 
 
@@ -137,7 +137,7 @@ export default function Dashboard() {
     const selectedArray = [...connections];
     selectedArray.push(selected);
 
-    
+
     setConnections(selectedArray);
     setWaypoints(selectedArray.map((connection) => {
       return {
@@ -197,8 +197,8 @@ export default function Dashboard() {
     if (!mapRef.current) return
     setCenter(mapRef.current.getCenter())
   }
-  
-  
+
+
 
   useLayoutEffect(() => {
 
@@ -225,14 +225,14 @@ export default function Dashboard() {
       const maxResults = 500;
       console.log(userData.connectionType)
       let connectionID
-      if (userData.connectionType === 'Type 2 (Socket Only)'){
+      if (userData.connectionType === 'Type 2 (Socket Only)') {
         connectionID = '25'
         //console.log(connectionID)
-      } 
-      
-      if (userData.connectionType === 'CCS (Type 2)'){
+      }
+
+      if (userData.connectionType === 'CCS (Type 2)') {
         connectionID = '25,33'
-        
+
       }
 
       console.log(connectionID)
@@ -242,60 +242,60 @@ export default function Dashboard() {
       );
       const data = await result.json();
 
-      
+
 
       const markers = data.map((point) => {
         // console.log('HEREE')
-       
+
         // console.log('HEREE')
         //  if (userData.connectionType && point.Connections[0].ConnectionType.Title == userData.connectionType) {
-        
-        
+
+
         // let countConnector = 0
-        
+
         // for (let i = 0; i < point.Connections.length; i++) {
         //   if ( userData.connectionType && point.Connections[i].ConnectionType.Title == userData.connectionType) {
         //     countConnector++
         //   }
         // }
-        
-       // if (countConnector > 0) {
-          return {
-            name: point.AddressInfo.Title,
-            lat: point.AddressInfo.Latitude,
-            lng: point.AddressInfo.Longitude,
-            powerLevel: point.Connections[0] && point.Connections[0].LevelID,
-            connections: point.Connections.map((connection) => {
 
-              return {
-                connectionType: connection.ConnectionType,
-                power: connection.PowerKW,
-                statusType: connection.StatusType,
-              }
+        // if (countConnector > 0) {
+        return {
+          name: point.AddressInfo.Title,
+          lat: point.AddressInfo.Latitude,
+          lng: point.AddressInfo.Longitude,
+          powerLevel: point.Connections[0] && point.Connections[0].LevelID,
+          connections: point.Connections.map((connection) => {
 
-            }),
+            return {
+              connectionType: connection.ConnectionType,
+              power: connection.PowerKW,
+              statusType: connection.StatusType,
+            }
 
-            usageCost: point.UsageCost,
-            usageType: point.UsageType,
-            operational: point.Connections.filter((connection) => {
-              if (connection.StatusType){
-                return connection.StatusType.IsOperational;
-              }
-              
-            }).length
-              ? true
-              : false,
-          };
-      //  }
+          }),
+
+          usageCost: point.UsageCost,
+          usageType: point.UsageType,
+          operational: point.Connections.filter((connection) => {
+            if (connection.StatusType) {
+              return connection.StatusType.IsOperational;
+            }
+
+          }).length
+            ? true
+            : false,
+        };
+        //  }
 
       });
       console.log(markers)
       // let markers2 = markers.filter(e => e != null);
       // let markers3 = markers2.splice(150,200)
       // console.log(markers3);
-     // console.log(markers)
-     const shuffled = markers.sort(() => 0.5 - Math.random());
-     let markers2 = shuffled.slice(0, 100);
+      // console.log(markers)
+      const shuffled = markers.sort(() => 0.5 - Math.random());
+      let markers2 = shuffled.slice(0, 100);
       setMarkers(markers2);
 
 
@@ -306,9 +306,14 @@ export default function Dashboard() {
     return () => { };
   }, [values.response]);
 
+  console.log('SELECTED')
+  console.log(selected)
+  console.log(typeof (selected))
+  console.log('PLACES')
+  console.log(places)
   return isLoaded ? (
     <>
-      <NavBar isLoggedIn={true}/>
+      <NavBar isLoggedIn={true} />
       <div className="maps__container">
         <div className="info__holder">
           <div
@@ -333,7 +338,7 @@ export default function Dashboard() {
             className="directions__holder anim"
             style={{ animationDelay: "-0.1s" }}
           >
-            <Directions route={values.response ? [values.response.routes[0].legs[0].distance.text, values.response.routes[0].legs[0].duration.text, values.response.routes[0].summary, values.response.routes[0].legs] : null}/>
+            <Directions route={values.response ? [values.response.routes[0].legs[0].distance.text, values.response.routes[0].legs[0].duration.text, values.response.routes[0].summary, values.response.routes[0].legs] : null} />
           </div>
         </div>
         <div className="maps__holder">
@@ -351,63 +356,70 @@ export default function Dashboard() {
               /* Child components, such as markers, info windows, etc. */
               markers &&
 
-                markers.map((marker, index) => (
-                  <Marker
-                    key={index}
-                    position={{ lat: marker.lat, lng: marker.lng }}
-                    icon={{
-                      url: marker.operational
-                        ? `bolt${marker.powerLevel}.svg`
-                        : `bad-bolt.svg`,
-                      scaledSize: new window.google.maps.Size(30, 30),
-                      origin: new window.google.maps.Point(0, 0),
-                      anchor: new window.google.maps.Point(10, 10),
-                    }}
-                    onClick = { async () => {
-                      
-                      setSelected(marker)
-                      
-                      let request = {
-                        location: new window.google.maps.LatLng(marker.lat,marker.lng),
-                        radius: 1604,
+              markers.map((marker, index) => (
+                <Marker
+                  key={index}
+                  position={{ lat: marker.lat, lng: marker.lng }}
+                  icon={{
+                    url: marker.operational
+                      ? `bolt${marker.powerLevel}.svg`
+                      : `bad-bolt.svg`,
+                    scaledSize: new window.google.maps.Size(30, 30),
+                    origin: new window.google.maps.Point(0, 0),
+                    anchor: new window.google.maps.Point(10, 10),
+                  }}
+                  onClick={async () => {
+
+                    setSelected(marker)
+
+                    let request = {
+                      location: new window.google.maps.LatLng(marker.lat, marker.lng),
+                      radius: 1604,
+                    }
+                    service.nearbySearch(request, (results, status) => {
+
+                      if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
+                        const initialPlaces = results.map((place) => {
+                          return {
+                            ...place, lat: place.geometry.location.lat(), lng: place.geometry.location.lng()
+                          }
+                        })
+                        console.log(initialPlaces)
+                        initialPlaces.shift()
+                        initialPlaces.pop()
+                        console.log(initialPlaces)
+                        setPlaces(initialPlaces);
                       }
-                      service.nearbySearch(request, (results, status) => {
-                        
-                        if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
-                          setPlaces(results.map((place)=> {return {
-                              ...place, lat: place.geometry.location.lat(), lng:place.geometry.location.lng()
-                          }}));
-                        }
-                        
-                      });
-                    }}
-                    
-                    
-                    />))}
-                    
-                     
-                    {places ? places.map((place,index) => <Marker 
-                    className = "places__marker"
-                    key = {place.id}
-                    position = {{lat: place.lat,lng: place.lng}}
-                    icon ={{
-                      backgroundColor: place.icon_background_color,
-                      url: place.icon,
-                      scaledSize: new window.google.maps.Size(30,30),
-                      origin: new window.google.maps.Point(0,0),
-                      anchor: new window.google.maps.Point(10,10)
-                    }}
-                    options={{
-                      styles: {backgroundColor: place.icon_background_color}
-                    }}
-                    />
-                    )
-                    
-                    
-                    
-                    
-                    
-                    : <h1>NO PLACES</h1>}
+
+                    });
+                  }}
+
+
+                />))}
+
+
+            {places ? places.map((place, index) => <Marker
+              className="places__marker"
+              key={place.id}
+              position={{ lat: place.lat, lng: place.lng }}
+              icon={{
+                backgroundColor: place.icon_background_color,
+                url: place.icon,
+                scaledSize: new window.google.maps.Size(30, 30),
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(10, 10)
+              }}
+              options={{
+                styles: { backgroundColor: place.icon_background_color }
+              }}
+            />
+            )
+
+
+
+
+
+              : <h1>NO PLACES</h1>}
 
             {selected && (
               <div className="maps__infoWindow">
@@ -444,14 +456,54 @@ export default function Dashboard() {
                             : "false"}
                         </li>
                         <li></li>
-                      
+
                       </ul>
                     ))}
 
-                    <h3> Places info </h3>
 
-                    <button onClick={() => handleSelect(selected)}>
-                      Select
+                    <h3> Places nearby </h3>
+                    {places ?
+
+                      places.map((place, index) => (
+                        <ul key={index}>
+                          <li> {place.name}</li>
+                        </ul>
+                      ))
+                      : <h1>NO PLACES</h1>}
+
+
+
+                    {/* {places ? <p> there is a place </p> : <p> there is a place </p> }
+                     {places.map((place) => (
+                      <p> {place.name} </p>
+                     ) )}  */}
+
+
+
+
+                    {/* 
+                    {places.map((place) => (
+                      // <ul key={index}>
+                      //   {/* <h3>Connection #{index + 1}</h3>
+                      //   <li>Power: {connection.power} kW </li>
+                      //   <li>Connector Type: {connection.connectionType.Title}</li>
+
+                      //   <li>
+                      //     Operational:{" "}
+                      //     {connection.statusType.IsOperational
+                      //       ? "true"
+                      //       : "false"}
+                      //   </li>
+                      //   <li></li> */}
+                    {/* //   <li> {place.name}</li>
+                      // </ul>
+                      <p> {place.name} </p>
+                    ))}  */}
+
+
+
+                    <button onClick={() => handleSelect(selected)} id='addWayPointButton'>
+                      Add to route
                     </button>
                   </div>
 
@@ -466,12 +518,12 @@ export default function Dashboard() {
                 waypoints: waypoints,
               }}
               callback={(response) => {
-                
+
                 directionsCallback(response)
               }}
             />
             <DirectionsRenderer
-              options={{ map: mapRef.current, directions: values.response, zoom: mapRef.current && mapRef.current.getZoom(), center: mapRef.current && mapRef.current.getCenter(), preserveViewport: true}}
+              options={{ map: mapRef.current, directions: values.response, zoom: mapRef.current && mapRef.current.getZoom(), center: mapRef.current && mapRef.current.getCenter(), preserveViewport: true }}
             />
           </GoogleMap>
 
