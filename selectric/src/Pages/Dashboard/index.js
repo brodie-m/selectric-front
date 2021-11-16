@@ -212,11 +212,23 @@ export default function Dashboard() {
       const polyline =
         values.response && values.response.routes[0].overview_polyline;
       const distance = 1;
-      const maxResults = 40;
+      const maxResults = 500;
+      console.log(userData.connectionType)
+      let connectionID
+      if (userData.connectionType === 'Type 2 (Socket Only)'){
+        connectionID = '25'
+        //console.log(connectionID)
+      } 
+      
+      if (userData.connectionType === 'CCS (Type 2)'){
+        connectionID = '25,33'
+        
+      }
 
+      console.log(connectionID)
       //const result = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&countrycode=GB&maxresults=100?key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`)
       const result = await fetch(
-        `https://api.openchargemap.io/v3/poi/?output=json&distance=${distance}&polyline=${polyline}&maxresults=${maxResults}&key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`
+        `https://api.openchargemap.io/v3/poi/?output=json&distance=${distance}&polyline=${polyline}&maxresults=${maxResults}&connectiontypeid=${connectionID}&key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`
       );
       const data = await result.json();
       //console.log(data);
@@ -227,13 +239,17 @@ export default function Dashboard() {
         console.log(point.Connections)
         // console.log('HEREE')
         //  if (userData.connectionType && point.Connections[0].ConnectionType.Title == userData.connectionType) {
-        let countConnector = 0
-        for (let i = 0; i < point.Connections.length; i++) {
-          if ( userData.connectionType && point.Connections[i].ConnectionType.Title == userData.connectionType) {
-            countConnector++
-          }
-        }
-        if (countConnector > 0) {
+        
+        
+        // let countConnector = 0
+        
+        // for (let i = 0; i < point.Connections.length; i++) {
+        //   if ( userData.connectionType && point.Connections[i].ConnectionType.Title == userData.connectionType) {
+        //     countConnector++
+        //   }
+        // }
+        
+       // if (countConnector > 0) {
           return {
             name: point.AddressInfo.Title,
             lat: point.AddressInfo.Latitude,
@@ -252,18 +268,24 @@ export default function Dashboard() {
             usageCost: point.UsageCost,
             usageType: point.UsageType,
             operational: point.Connections.filter((connection) => {
-              return connection.StatusType.IsOperational;
+              if (connection.StatusType){
+                return connection.StatusType.IsOperational;
+              }
+              
             }).length
               ? true
               : false,
           };
-        }
+      //  }
 
       });
       console.log(markers)
-      let markers2 = markers.filter(e => e != null);
-      console.log(markers2);
+      // let markers2 = markers.filter(e => e != null);
+      // let markers3 = markers2.splice(150,200)
+      // console.log(markers3);
      // console.log(markers)
+     const shuffled = markers.sort(() => 0.5 - Math.random());
+     let markers2 = shuffled.slice(0, 100);
       setMarkers(markers2);
 
 
@@ -410,8 +432,10 @@ export default function Dashboard() {
                             : "false"}
                         </li>
                         <li></li>
+                      
                       </ul>
                     ))}
+                    <h3> Places info </h3>
                     <button onClick={() => handleSelect(selected)}>
                       Select
                     </button>
