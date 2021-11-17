@@ -8,9 +8,9 @@ export default function MobileMenu({isLoggedIn}) {
    
     const actions = isLoggedIn ? [
         
-        { icon: <HomeIcon />, name: 'Home' },
-        { icon: <AccountCircleIcon />, name: 'Profile' },
-        { icon: <QuestionAnswerTwoToneIcon />, name: 'About' },
+        { icon: <HomeIcon onClick={() => window.location.href = 'https://selectric.netlify.app/'}/>, name: 'Home' },
+        { icon: <AccountCircleIcon onClick={() => window.location.href = 'https://selectric.netlify.app/profile'} />, name: 'Profile' },
+        { icon: <QuestionAnswerTwoToneIcon onClick={() => window.location.href = 'https://selectric.netlify.app/#about'}/>, name: 'About' },
         
       ] : [
         

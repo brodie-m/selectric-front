@@ -85,7 +85,7 @@ export default function NavBar(props) {
             >
               Login
             </Button>
-              <Button
+              <Button id='register-button'
                 sx={{
                   m: 1, px: 4, py: 1, backgroundColor: '#ff4820', color: 'white', '&:hover': {
                     backgroundColor: '#ff4820'

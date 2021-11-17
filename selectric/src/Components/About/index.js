@@ -5,9 +5,10 @@ export default function About() {
   return (
     <div className="selectric__about section__margin anim" id="about">
       <div className="selectric__about-heading">
-        <h1 className="gradient__text">learn more about selectric</h1>
+        <h1 className="gradient__text" style={{marginBottom: '10px'}}>learn more about selectric</h1>
         <div className="selectric__about-feature">
-          <Feature title="Meet our team" avatars={true} />
+          <Feature title="Meet our team" avatars={true}
+            />
         </div>
       </div>
       <div className="selectric__about-container">

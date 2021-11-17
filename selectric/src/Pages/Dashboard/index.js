@@ -185,11 +185,11 @@ export default function Dashboard() {
   });
 
   const containerStyle = {
-    minWidth: '500px',
-    width: "40vw",
+    minWidth: '320px',
+    width: "50vw",
 
-    minHeight: '500px',
-    height: "40vw",
+    minHeight: '320px',
+    height: "50vw",
   };
 
   // const center = {
@@ -385,6 +385,12 @@ export default function Dashboard() {
               values={values}
               setValues={setValues}
             />
+            <div
+            className="directions__holder anim directions__holder__mobile"
+            style={{ animationDelay: "-0.1s" }}
+          >
+            <Directions route={values.response ? [values.response.routes[0].legs[0].distance.text, values.response.routes[0].legs[0].duration.text, values.response.routes[0].summary, values.response.routes[0].legs] : null} />
+          </div>
           </div>
           <br />
           <div>
@@ -451,7 +457,7 @@ export default function Dashboard() {
           </div>
 
           <div
-            className="directions__holder anim"
+            className="directions__holder anim directions__holder__desktop"
             style={{ animationDelay: "-0.1s" }}
           >
             <Directions route={values.response ? [values.response.routes[0].legs[0].distance.text, values.response.routes[0].legs[0].duration.text, values.response.routes[0].summary, values.response.routes[0].legs] : null} />

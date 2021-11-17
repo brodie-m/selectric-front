@@ -102,7 +102,7 @@
     }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 660px) {
     
     .selectric__about-feature .selectric__features-container__feature {
         flex-direction: column;
@@ -117,6 +117,23 @@
         font-size: 40px;
         line-height: 40px;
     }
+    .directions__holder__desktop {
+        display: none !important;
+      }
+      .directions__holder__mobile {
+        display: flex !important;
+        margin-top: -40px !important;
+      }
+      .directions__holder__mobile h3, .directions__holder__mobile h4 {
+        display: none;
+        
+      }
+      .directions__holder__mobile button {
+        margin-top: 50px;
+      }
+      .info__holder {
+        margin-bottom: 2rem;
+      }
 }
 
 @media screen and (max-width: 350px) {

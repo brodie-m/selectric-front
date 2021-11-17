@@ -38,7 +38,7 @@ export default function Header(props) {
             
             <div className = 'selectric__header-content__input'>
                
-                <input type='email' placeholder='your email address' id='email-input'></input>
+                <input type='email' placeholder='your email' id='email-input'></input>
                 <button onClick = {() => {
                     const emailToPass = document.getElementById('email-input').value
                     console.log(emailToPass)
