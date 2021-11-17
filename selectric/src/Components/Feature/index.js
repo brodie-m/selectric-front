@@ -23,7 +23,7 @@ export default function Feature({title,text,avatars}) {
                     <p>{text}</p>
                 </div>
                 {avatars && <SpeedDial 
-                sx={{p: 2, mb:-3}}
+                sx={{p: 2}}
                  ariaLabel="people"
                  icon={<SpeedDialIcon sx={{ background: 'var(--gradient-text)', borderRadius: '20%', color: 'white', marginLeft: '22px'}}/>}
                  direction={'right'}
