@@ -99,10 +99,20 @@ export default function MapOptions(props) {
 
 
 
-      <Avatar className='options__item-c'>
-        <PendingIcon />
-      </Avatar>
-
+      <Button
+              sx={{
+                m: 1, px: 4, py: 1, backgroundColor: 'transparent', color: 'white', '&:hover': {
+                  backgroundColor: '#ff4820'
+                }
+              }}
+              variant="contained"
+              onClick={() => {
+                props.handleOpen();
+                //setFormToDisplay();
+              }}
+            >
+              Options
+            </Button>
       <Button className='options__item-d'
         sx={{
           m: 1,

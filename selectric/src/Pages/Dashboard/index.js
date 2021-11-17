@@ -378,6 +378,7 @@ export default function Dashboard() {
             style={{ animationDelay: "-0.2s" }}
           >
             <MapOptions
+            handleOpen={handleOpen}
               handleSubmit={handleSubmit}
               handleGo={handleGo}
               handleChange={handleChange}
@@ -388,20 +389,7 @@ export default function Dashboard() {
           <br />
           <div>
 
-            <Button
-              sx={{
-                m: 1, px: 4, py: 1, backgroundColor: 'transparent', color: 'white', '&:hover': {
-                  backgroundColor: '#ff4820'
-                }
-              }}
-              variant="contained"
-              onClick={() => {
-                handleOpen();
-                //setFormToDisplay();
-              }}
-            >
-              Options
-            </Button>
+            
 
             <Container sx={{ m: 2, p: 2, display: "flex" }}>
 
