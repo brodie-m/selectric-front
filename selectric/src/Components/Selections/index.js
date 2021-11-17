@@ -161,10 +161,11 @@ return (
                     isOptionEqualToValue={(option, value) => option.code === value}
                     renderInput={(params) => <TextField {...params} label="Car Type" />}
                     />
-            </div> 
-            <Button className = 'selections__submit' sx={{ m: 1, px: 4, py: 1, color: 'white', backgroundColor: '#ff4820', '&:hover': {
+                    <Button className = 'selections__submit' sx={{ m: 1, px: 4, py: 1, width: '90%', color: 'white', backgroundColor: '#ff4820', '&:hover': {
               backgroundColor: '#ff4820'
           } }} variant='contained' type='submit'>Submit</Button>
+            </div> 
+            
         </div>
         </FormGroup>
         </form>
