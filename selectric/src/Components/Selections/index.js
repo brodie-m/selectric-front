@@ -106,7 +106,7 @@ useLayoutEffect(()=> {
         updates: [
             {name: "username", value: values.name},
             {name: "profile_image", value: values.profile_image},
-            {name: "cars", value: {'brand': values.carObject.Brand, 'model': values.carObject.Model, 'plugType': values.carObject.PlugType}}
+            {name: "cars", value: {'Brand': values.carObject.Brand, 'Model': values.carObject.Model, 'plugType': values.carObject.PlugType}}
             ]
         
       }),
