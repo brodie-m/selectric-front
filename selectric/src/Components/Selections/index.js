@@ -189,14 +189,17 @@ export default function Selections() {
                 />
               )}
               <Button
-                sx={{
-                  m: 1,
-                  p: 1,
-                  width: "90%",
-                  "&:hover": {
-                    background: "transparent",
-                  },
-                }}
+              sx={{
+                m: 1,
+                px: 4,
+                py: 1,
+                width: "90%",
+                color: "white",
+                backgroundColor: "#ff4820",
+                "&:hover": {
+                  backgroundColor: "#ff4820",
+                },
+              }}
                 variant="contained"
                 component="label"
                 onClick={handleFileUpload}
