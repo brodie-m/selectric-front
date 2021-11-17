@@ -34,7 +34,7 @@ import './profile.css'
   
 
 export default function Profile( props) {
-
+  console.log(props.userData)
 
     return (
         <div className='profile__holder'>
@@ -53,7 +53,8 @@ export default function Profile( props) {
             <div className='names__holder'>
 
             <h2 className='profile__name'>{props.userData && props.userData.username}</h2>
-            <h3 className = 'car__name'>{props.userData && props.userData.cars.brand}{props.userData && props.userData.cars.model}</h3>
+
+            <h3 className = 'car__name'>{props.userData && `${props.userData.cars.Brand}${props.userData.cars.Model}`}</h3>
 
             </div>
             

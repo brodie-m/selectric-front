@@ -8,6 +8,7 @@ import logo from '../../assets/logo.svg'
 import MobileMenu from "../MobileMenu";
 export default function NavBar(props) {
   const isLoggedIn = props.isLoggedIn
+  console.log(isLoggedIn)
   const token = localStorage.getItem('token')
 
   // const toggleDrawer = (anchor, open) => (event) => {
@@ -42,28 +43,30 @@ export default function NavBar(props) {
   const handleOpen = () => setOpen(true);
 
   return (
-    <>
-      <div className="selectric__navbar">
-        <div className="selectric__navbar-links">
-          <div className="selectric__navbar-links_logo">
-            <img src={logo} alt="logo" />
-          </div>
 
-          <div className="selectric__navbar-links_container">
+      <>
+    <div className="selectric__navbar">
+      <div className="selectric__navbar-links">
+        <div className="selectric__navbar-links_logo">
+          <img src={logo} alt="logo" />
+        </div>
+      
+      <div className="selectric__navbar-links_container">
+        
+        <p>
+          <a href="https://selectric.netlify.app/">Home</a>
+        </p>
+        <p>
+          <a href="https://selectric.netlify.app/#about">About</a>
+        </p>
+        { isLoggedIn && <p>
+          <a href="https://selectric.netlify.app/profile">Profile</a>
+        </p>}
+        
+        <div className = 'selectric__mobile-menu'>
 
-            <p>
-              <a href="https://selectric.netlify.app/">Home</a>
-            </p>
-            <p>
-              <a href="https://selectric.netlify.app/">About</a>
-            </p>
-            <p>
-              <a href="https://selectric.netlify.app/profile">Profile</a>
-            </p>
+        <MobileMenu isLoggedIn={isLoggedIn}/>
 
-            <div className='selectric__mobile-menu'>
-
-              <MobileMenu />
             </div>
           </div>
 

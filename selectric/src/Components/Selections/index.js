@@ -1,6 +1,6 @@
 import { Avatar, FormControl, FormGroup, InputLabel, OutlinedInput, Autocomplete, TextField, Button } from '@mui/material'
 
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import './selections.css'
 export default function Selections() {
     const [values, setValues] = useState({
@@ -27,7 +27,7 @@ export default function Selections() {
       const carFilter = carToFind.filter(car => car.Model == modelName)
 console.log(carToFind)
 console.log(carFilter)
-carFilter[0]._id = ""
+
 console.log(carFilter)
     setValues({...values, carObject: carFilter[0]})
     console.log(values.carObject)
@@ -72,6 +72,7 @@ useLayoutEffect(()=> {
         const result = await fetch(`https://selectric.herokuapp.com/user`, options)
         
         const data = await result.json()
+        console.log(data)
         setUserData(data)
         
     
@@ -81,6 +82,11 @@ useLayoutEffect(()=> {
           
       };
   }, [])
+
+  useEffect(() => {
+      if(!userData) return
+    setValues({...values, name: userData.username, carObject: userData.cars})
+  },[userData])
 
   console.log(carData)
 
@@ -100,13 +106,16 @@ useLayoutEffect(()=> {
         updates: [
             {name: "username", value: values.name},
             {name: "profile_image", value: values.profile_image},
-            {name: "cars", value: {'brand': values.carObject.Brand, 'model': values.carObject.Model, 'plugType': values.carObject.PlugType}}
+            {name: "cars", value: {'Brand': values.carObject.Brand, 'Model': values.carObject.Model, 'plugType': values.carObject.PlugType}}
             ]
         
       }),
     }
     console.log(options)
     const result = await fetch(`https://selectric.herokuapp.com/user`, options)
+    if (result.status === 201) {
+        window.location.href = 'http://localhost:3000/dashboard'
+    }
 };
 
 
@@ -116,8 +125,9 @@ return (
         <FormGroup>
         <div className='profile__holder'>
             <FormControl sx={{ m: 1, width: 'auto' }} variant="outlined">
+                
                 <Button
-                    sx={{m:1 , p:1, '&:hover': {
+                    sx={{m:1 , p:1, width: '90%','&:hover': {
                         background: 'transparent'
                     }}}
                     variant="contained"
@@ -130,13 +140,15 @@ return (
                         onChange={handleFileChange}
                     />
                     </Button>
+                    <p className='change__image-text'>click to change</p>
                 </FormControl>
+
             <div className='names__holder'>
                 <FormControl sx={{ m: 1, width: '90%' }} variant="outlined">
                 <InputLabel htmlFor="outlined-username">Username</InputLabel>
                 <OutlinedInput
                     id="outlined-username"
-                    value={values.username}
+                    value={values.name}
                     onChange={handleChange("name")}
                     label="Username"
                     > 
@@ -155,10 +167,11 @@ return (
                     isOptionEqualToValue={(option, value) => option.code === value}
                     renderInput={(params) => <TextField {...params} label="Car Type" />}
                     />
-            </div> 
-            <Button className = 'selections__submit' sx={{ m: 1, px: 4, py: 1, color: 'white', backgroundColor: '#ff4820', '&:hover': {
+                    <Button className = 'selections__submit' sx={{ m: 1, px: 4, py: 1, width: '90%', color: 'white', backgroundColor: '#ff4820', '&:hover': {
               backgroundColor: '#ff4820'
           } }} variant='contained' type='submit'>Submit</Button>
+            </div> 
+            
         </div>
         </FormGroup>
         </form>

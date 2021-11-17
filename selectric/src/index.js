@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import {ThemeProvider} from '@mui/material/styles'
 import { createTheme } from '@mui/material';
-
+import './App.css'
 const theme = createTheme({
   palette: {
     mode: 'dark',
@@ -14,7 +14,7 @@ const theme = createTheme({
 ReactDOM.render(
   <ThemeProvider theme={theme}>
 
-    <App />
+    <App className='gradient__bg'/>
   </ThemeProvider>,
   
   document.getElementById('root')
