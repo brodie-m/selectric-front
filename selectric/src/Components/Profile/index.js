@@ -53,6 +53,7 @@ export default function Profile( props) {
             <div className='names__holder'>
 
             <h2 className='profile__name'>{props.userData && props.userData.username}</h2>
+
             <h3 className = 'car__name'>{props.userData && `${props.userData.cars.Brand}${props.userData.cars.Model}`}</h3>
 
             </div>

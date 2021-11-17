@@ -10,7 +10,7 @@ export default function NavBar(props) {
   const isLoggedIn = props.isLoggedIn
   console.log(isLoggedIn)
   const token = localStorage.getItem('token')
-  
+
   // const toggleDrawer = (anchor, open) => (event) => {
   //     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
   //       return;
@@ -43,6 +43,7 @@ export default function NavBar(props) {
   const handleOpen = () => setOpen(true);
 
   return (
+
       <>
     <div className="selectric__navbar">
       <div className="selectric__navbar-links">
@@ -65,54 +66,62 @@ export default function NavBar(props) {
         <div className = 'selectric__mobile-menu'>
 
         <MobileMenu isLoggedIn={isLoggedIn}/>
+
+            </div>
+          </div>
+
+          <div className="selectric__navbar-sign">
+            {!isLoggedIn ? <><Button
+              sx={{
+                m: 1, px: 4, py: 1, backgroundColor: 'transparent', color: 'white', '&:hover': {
+                  backgroundColor: '#ff4820'
+                }
+              }}
+              variant="contained"
+              onClick={() => {
+                handleOpen();
+                setFormToDisplay(<Login />);
+              }}
+            >
+              Login
+            </Button>
+              <Button
+                sx={{
+                  m: 1, px: 4, py: 1, backgroundColor: '#ff4820', color: 'white', '&:hover': {
+                    backgroundColor: '#ff4820'
+                  }
+                }}
+                variant="contained"
+                onClick={() => {
+                  handleOpen();
+                  setFormToDisplay(<Register />);
+                }}
+              >
+                Register
+              </Button></> : <Button
+                sx={{
+                  m: 1, px: 4, py: 1, backgroundColor: '#ff4820', color: 'white', '&:hover': {
+                    backgroundColor: '#ff4820'
+                  }
+                }}
+                variant="contained"
+                onClick={(e) => {
+                  handleLogout(e);
+                }}
+              >Logout</Button>}
+          </div>
+
+
         </div>
       </div>
-      
-      <div className="selectric__navbar-sign">
-        {!isLoggedIn ? <><Button
-          sx={{ m: 1, px: 4, py: 1, backgroundColor: 'transparent', color: 'white', '&:hover': {
-            backgroundColor: '#ff4820' }}}
-          variant="contained"
-          onClick={() => {
-            handleOpen();
-            setFormToDisplay(<Login />);
-          }}
-        >
-          Login
-        </Button>
-        <Button
-          sx={{ m: 1, px: 4, py: 1, backgroundColor: '#ff4820', color: 'white', '&:hover': {
-              backgroundColor: '#ff4820'
-          } }}
-          variant="contained"
-          onClick={() => {
-            handleOpen();
-            setFormToDisplay(<Register />);
-          }}
-        >
-          Register
-        </Button></> : <Button
-          sx={{ m: 1, px: 4, py: 1, backgroundColor: '#ff4820', color: 'white', '&:hover': {
-              backgroundColor: '#ff4820'
-          } }}
-          variant="contained"
-          onClick={(e) => {
-            handleLogout(e);
-          }}
-        >Logout</Button>}
-        </div>
-        
-      
-    </div>
-    </div>
-    <Container sx={{m: 2, p:2, display: "flex"}}>
+      <Container sx={{ m: 2, p: 2, display: "flex" }}>
 
-      
-    <Dialog open={open} onClose = {handleClose}>
-    {formToDisplay}
-</Dialog>
-</Container>
-</>
+
+        <Dialog open={open} onClose={handleClose}>
+          {formToDisplay}
+        </Dialog>
+      </Container>
+    </>
     // <AppBar  position='static' className="selectric__navbar">
     //     <Toolbar className="selectric__links">
     //     <IconButton
