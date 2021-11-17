@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
-    Button,
+  Button,
   FormControl,
   FormGroup,
   FormHelperText,
@@ -12,64 +12,75 @@ import {
 } from "@mui/material";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
-import './Login.css'
-import logo from '../../assets/logo.svg'
+import "./Login.css";
+import logo from "../../assets/logo.svg";
+import { toast } from "react-toastify";
 export default function Login() {
-    const [values, setValues] = useState({
-        email: "",
-        password: "",
-        showPassword: false,
-      });
-    
-      const [goodLogin, setGoodLogin] = useState(false)
-    
-      const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-      };
-    
-      const handleClickShowPassword = () => {
-        setValues({
-          ...values,
-          showPassword: !values.showPassword,
-        });
-      };
-    
-      const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-      };
-    
-      const handleSubmit = async (e) => {
-          e.preventDefault();
-          console.log('submit in progress')
-          console.log(values)
-          const options = {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                ...values
-            }),
-          };
-          
-          const result = await fetch("https://selectric.herokuapp.com/login",options)
-          if (result.status !== 200) {
-              setGoodLogin(false);
-              return;
-          }
-          const data = await result.json()
-          localStorage.setItem('token',data.token)
-          setGoodLogin(true)
-          window.location.href='./dashboard'
-          
-    
-      }
-    return (
-        <form onSubmit={handleSubmit}>
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+    showPassword: false,
+  });
+
+  const [goodLogin, setGoodLogin] = useState(false);
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("submit in progress");
+    console.log(values);
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...values,
+      }),
+    };
+
+    const result = await fetch(
+      "https://selectric.herokuapp.com/login",
+      options
+    );
+    if (result.status === 403 || result.status !== 201) {
+      let errorMsg = await result.text();
+      let error = JSON.parse(errorMsg);
+      toast.error(error.message);
+      setGoodLogin(false);
+      return;
+    }
+    const data = await result.json();
+    toast.success("logged in");
+    localStorage.setItem("token", data.token);
+    setGoodLogin(true);
+    window.location.href = "./dashboard";
+  };
+  return (
+    <form onSubmit={handleSubmit}>
       <FormGroup>
-      <img src={logo} className = 'form__logo'/>
-        <h2 className ='gradient__text login__text-title' style={{fontWeight: 800}}>welcome back!</h2>
-        <FormControl sx={{ m: 1, width: 'auto' }} variant="outlined">
+        <img src={logo} className="form__logo" />
+        <h2
+          className="gradient__text login__text-title"
+          style={{ fontWeight: 800 }}
+        >
+          welcome back!
+        </h2>
+        <FormControl sx={{ m: 1, width: "auto" }} variant="outlined">
           <InputLabel htmlFor="outlined-email">Email</InputLabel>
           <OutlinedInput
             id="outlined-email"
@@ -102,10 +113,23 @@ export default function Login() {
             label="Password"
           />
         </FormControl>
-        <Button sx={{ m: 1, px: 4, py: 1, color: 'white', backgroundColor: '#ff4820', '&:hover': {
-              backgroundColor: '#ff4820'
-          } }} variant='contained' type='submit'>Submit</Button>
+        <Button
+          sx={{
+            m: 1,
+            px: 4,
+            py: 1,
+            color: "white",
+            backgroundColor: "#ff4820",
+            "&:hover": {
+              backgroundColor: "#ff4820",
+            },
+          }}
+          variant="contained"
+          type="submit"
+        >
+          Submit
+        </Button>
       </FormGroup>
-      </form>
-    )
+    </form>
+  );
 }
