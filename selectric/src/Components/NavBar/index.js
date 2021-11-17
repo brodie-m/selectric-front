@@ -52,14 +52,14 @@ export default function NavBar(props) {
       <div className="selectric__navbar-links_container">
         
         <p>
-          <a href="http://localhost:3000/">Home</a>
+          <a href="https://selectric.netlify.app/">Home</a>
         </p>
         <p>
-          <a href="http://localhost:3000/">About</a>
+          <a href="https://selectric.netlify.app/">About</a>
         </p>
-        { window.location.href == "http://localhost:3000/profile" || window.location.href == "http://localhost:3000/dashboard" ? 
+        { window.location.href == "https://selectric.netlify.app/profile" || window.location.href == "https://selectric.netlify.app/dashboard" ? 
           <p>
-          <a href="http://localhost:3000/profile">Profile</a>
+          <a href="https://selectric.netlify.app/profile">Profile</a>
         </p> : null}
         
         <div className = 'selectric__mobile-menu'>
