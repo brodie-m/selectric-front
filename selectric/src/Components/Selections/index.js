@@ -158,6 +158,10 @@ export default function Selections() {
 
   return (
     <>
+    <div class="info-div">
+    <p class="gradient__text1 anim">Hello, Welcome to Selectric!</p>
+    <p class="gradient__text1 anim">Let's get you started on your journey:</p>
+    </div>
       <form onSubmit={handleSubmit}>
         <FormGroup>
           <div className="profile__holder">
@@ -199,7 +203,7 @@ export default function Selections() {
               >
                 Upload
               </Button>
-              <p className="change__image-text">click to change</p>
+              
             </FormControl>
 
             <div className="names__holder">
