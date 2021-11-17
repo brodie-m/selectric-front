@@ -25,11 +25,60 @@ import {
   InputLabel,
   OutlinedInput,
   Autocomplete,
-  TextField
+  TextField,
+  Slider
 } from "@mui/material";
 import { AppBar, Dialog, IconButton, Toolbar } from "@mui/material";
 
 require("dotenv").config();
+
+
+
+const marks = [
+  {
+    value: 1,
+    label: '1',
+  },
+  {
+    value: 2,
+    label: '2',
+  },
+  {
+    value: 3,
+    label: '3',
+  },
+  {
+    value: 4,
+    label: '4',
+  },
+  {
+    value: 5,
+    label: '5',
+  },
+  {
+    value: 6,
+    label: '6',
+  },
+  {
+    value: 7,
+    label: '7',
+  },
+  {
+    value: 8,
+    label: '8',
+  },
+  {
+    value: 9,
+    label: '9',
+  },
+  {
+    value: 10,
+    label: '10',
+  },
+];
+
+
+
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -293,7 +342,7 @@ export default function Dashboard() {
       const markers = data.map((point) => {
         // console.log('HEREE')
 
-        
+
         // if (countConnector > 0) {
         return {
           name: point.AddressInfo.Title,
@@ -378,7 +427,7 @@ export default function Dashboard() {
             style={{ animationDelay: "-0.2s" }}
           >
             <MapOptions
-            handleOpen={handleOpen}
+              handleOpen={handleOpen}
               handleSubmit={handleSubmit}
               handleGo={handleGo}
               handleChange={handleChange}
@@ -386,73 +435,109 @@ export default function Dashboard() {
               setValues={setValues}
             />
             <div
-            className="directions__holder anim directions__holder__mobile"
-            style={{ animationDelay: "-0.1s" }}
-          >
-            <Directions route={values.response ? [values.response.routes[0].legs[0].distance.text, values.response.routes[0].legs[0].duration.text, values.response.routes[0].summary, values.response.routes[0].legs] : null} />
-          </div>
+              className="directions__holder anim directions__holder__mobile"
+              style={{ animationDelay: "-0.1s" }}
+            >
+              <Directions route={values.response ? [values.response.routes[0].legs[0].distance.text, values.response.routes[0].legs[0].duration.text, values.response.routes[0].summary, values.response.routes[0].legs] : null} />
+            </div>
           </div>
           <br />
           <div>
 
-            
+
 
             <Container sx={{ m: 2, p: 2, display: "flex" }}>
 
               <Dialog open={open} onClose={handleClose}>
-              <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography>Charging points distance (miles)</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <FormControl sx={{ m: 1 }} variant="outlined" className='options__item-a'>
-                  <InputLabel htmlFor="accordion-distance">Distance</InputLabel>
-                  <OutlinedInput
-                    id="accordion-distance"
-                    //value={values.from}
-                    onChange={(event) => handleDistanceChange(event)}
-                    label="Distance"
-                  ></OutlinedInput>
-                </FormControl>
-              </AccordionDetails>
-            </Accordion>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography>Choose how far away from your route you want charging points to show up for ( miles )</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    {/* <FormControl sx={{ m: 1 }} variant="outlined" className='options__item-a'> */}
+                    {/* <InputLabel htmlFor="accordion-distance">Distance</InputLabel> */}
+                    {/* <OutlinedInput
+                        // type="number"
+                        // id="accordion-distance"
+                        //value={values.from}
+                        // onChange={(event) => handleDistanceChange(event)}
+                        // label="Distance"
+                      ></OutlinedInput> */}
+                    {/* <Slider
+                        aria-label="Temperature"
+                        defaultValue={1}
+                        // getAriaValueText={valuetext}
+                        // valueLabelDisplay="auto"
+                        step={1}
+                        // marks
+                        min={1}
+                        max={10}
+                        // id="accordion-distance"
+                        onChange={(event) => handleDistanceChange(event)}
+                      // label="Distance"
+                      /> */}
+                    {/* <Slider
+                        aria-label="Temperature"
+                        defaultValue={30}
+                        // getAriaValueText={valuetext}
+                        color="secondary"
+                      /> */}
+                    {/* </FormControl> */}
+                    <div id="accordion-distance-div">
+                      <Slider
+                        aria-label="Temperature"
+                        defaultValue={1}
+                        // getAriaValueText={valuetext}
+                        valueLabelDisplay="auto"
+                        step={1}
+                        marks={marks}
+                        min={1}
+                        max={10}
+                        id="accordion-distance"
+                        onChange={(event) => handleDistanceChange(event)}
+                        label="Distance"
+                      />
+                    </div>
+                  </AccordionDetails>
 
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography>Types of places</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                {/* <FormControl sx={{ m: 1 }} variant="outlined" className='options__item-a'>
+                </Accordion>
+
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography>Choose the type of place you want to visit nearby whilst your car is charging</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    {/* <FormControl sx={{ m: 1 }} variant="outlined" className='options__item-a'>
                   <InputLabel htmlFor="accordion-places">Types of places</InputLabel>
                   
                 </FormControl> */}
-                <Autocomplete
-                  disablePortal
-                  name="cars"
-                  id="combo-box-demo"
-                  options={placesTypeData.map(place => {
-                    return `${capitalizeFirstLetter(place)}`
-                  })}
-                  sx={{ m: 1, width: '90%' }}
-                  value={values.placesTypeData}
-                  onChange={(event) => handlePlacesTypeChange(event)}
-                  isOptionEqualToValue={(option, value) => option.code === value}
-                  renderInput={(params) => <TextField {...params} label="Type of place" />}
-                />
-              </AccordionDetails>
-            </Accordion>
+                    <Autocomplete
+                      disablePortal
+                      name="cars"
+                      id="combo-box-demo"
+                      options={placesTypeData.map(place => {
+                        return `${capitalizeFirstLetter(place)}`
+                      })}
+                      sx={{ m: 1, width: '90%' }}
+                      value={values.placesTypeData}
+                      onChange={(event) => handlePlacesTypeChange(event)}
+                      isOptionEqualToValue={(option, value) => option.code === value}
+                      renderInput={(params) => <TextField {...params} label="Type of place" />}
+                    />
+                  </AccordionDetails>
+                </Accordion>
               </Dialog>
             </Container>
 
-            
+
 
           </div>
 
