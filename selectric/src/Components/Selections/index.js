@@ -122,8 +122,9 @@ return (
         <FormGroup>
         <div className='profile__holder'>
             <FormControl sx={{ m: 1, width: 'auto' }} variant="outlined">
+                
                 <Button
-                    sx={{m:1 , p:1, '&:hover': {
+                    sx={{m:1 , p:1, width: '90%','&:hover': {
                         background: 'transparent'
                     }}}
                     variant="contained"
@@ -136,7 +137,9 @@ return (
                         onChange={handleFileChange}
                     />
                     </Button>
+                    <p className='change__image-text'>click to change</p>
                 </FormControl>
+
             <div className='names__holder'>
                 <FormControl sx={{ m: 1, width: '90%' }} variant="outlined">
                 <InputLabel htmlFor="outlined-username">Username</InputLabel>

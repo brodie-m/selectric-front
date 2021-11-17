@@ -7,7 +7,7 @@ export default function Profile() {
     return(
         <>
         <NavBar isLoggedIn={true}/>
-        <div>
+        <div style={{height: '80vh'}}>
             <Selections/>
         </div>
         </>
