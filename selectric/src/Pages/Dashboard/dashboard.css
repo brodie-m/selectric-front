@@ -40,19 +40,6 @@
     
 }
 
-@media only screen and (max-width: 1000px) {
-    .maps__container {
-        flex-direction: column;
-        align-items: center;
-    }
-    .info__holder {
-        flex-direction: row;
-        width: 80vw;
-        justify-content: space-aroun
-    }
-}
-
-
 
 
 .maps__infoWindow {
