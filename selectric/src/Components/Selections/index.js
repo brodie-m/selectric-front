@@ -1,6 +1,6 @@
 import { Avatar, FormControl, FormGroup, InputLabel, OutlinedInput, Autocomplete, TextField, Button } from '@mui/material'
 
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import './selections.css'
 export default function Selections() {
     const [values, setValues] = useState({
@@ -83,6 +83,11 @@ useLayoutEffect(()=> {
       };
   }, [])
 
+  useEffect(() => {
+      if(!userData) return
+    setValues({...values, name: userData.username, carObject: userData.cars})
+  },[userData])
+
   console.log(carData)
 
   const handleSubmit = async (e) => {
@@ -137,7 +142,7 @@ return (
                 <InputLabel htmlFor="outlined-username">Username</InputLabel>
                 <OutlinedInput
                     id="outlined-username"
-                    value={values.username}
+                    value={values.name}
                     onChange={handleChange("name")}
                     label="Username"
                     > 
