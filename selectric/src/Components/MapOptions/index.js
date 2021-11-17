@@ -99,15 +99,6 @@ export default function MapOptions(props) {
 
 
 
-
-
-
-
-
-
-
-
-
       <Avatar className='options__item-c'>
         <PendingIcon />
       </Avatar>
