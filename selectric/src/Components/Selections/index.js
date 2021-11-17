@@ -27,7 +27,7 @@ export default function Selections() {
       const carFilter = carToFind.filter(car => car.Model == modelName)
 console.log(carToFind)
 console.log(carFilter)
-carFilter[0]._id = ""
+
 console.log(carFilter)
     setValues({...values, carObject: carFilter[0]})
     console.log(values.carObject)
@@ -72,6 +72,7 @@ useLayoutEffect(()=> {
         const result = await fetch(`https://selectric.herokuapp.com/user`, options)
         
         const data = await result.json()
+        console.log(data)
         setUserData(data)
         
     

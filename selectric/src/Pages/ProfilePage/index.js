@@ -6,7 +6,7 @@ export default function Profile() {
 
     return(
         <>
-        <NavBar/>
+        <NavBar isLoggedIn={true}/>
         <div>
             <Selections/>
         </div>

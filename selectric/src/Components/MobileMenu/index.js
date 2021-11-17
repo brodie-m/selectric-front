@@ -4,12 +4,17 @@ import React, { useState } from 'react'
 import HomeIcon from '@mui/icons-material/Home';
 import QuestionAnswerTwoToneIcon from '@mui/icons-material/QuestionAnswerTwoTone';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-export default function MobileMenu() {
+export default function MobileMenu({isLoggedIn}) {
    
-    const actions = [
+    const actions = isLoggedIn ? [
         
         { icon: <HomeIcon />, name: 'Home' },
         { icon: <AccountCircleIcon />, name: 'Profile' },
+        { icon: <QuestionAnswerTwoToneIcon />, name: 'About' },
+        
+      ] : [
+        
+        { icon: <HomeIcon />, name: 'Home' },
         { icon: <QuestionAnswerTwoToneIcon />, name: 'About' },
         
       ];
@@ -22,6 +27,7 @@ export default function MobileMenu() {
           sx={{transform: 'scale(0.7)'}}
         >
           {actions.map((action) => (
+            
             <SpeedDialAction
               key={action.name}
               icon={action.icon}

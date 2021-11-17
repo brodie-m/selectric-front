@@ -8,6 +8,7 @@ import logo from '../../assets/logo.svg'
 import MobileMenu from "../MobileMenu";
 export default function NavBar(props) {
   const isLoggedIn = props.isLoggedIn
+  console.log(isLoggedIn)
   const token = localStorage.getItem('token')
   
   // const toggleDrawer = (anchor, open) => (event) => {
@@ -57,13 +58,13 @@ export default function NavBar(props) {
         <p>
           <a href="https://selectric.netlify.app/#about">About</a>
         </p>
-        <p>
+        { isLoggedIn && <p>
           <a href="https://selectric.netlify.app/profile">Profile</a>
-        </p>
+        </p>}
         
         <div className = 'selectric__mobile-menu'>
 
-        <MobileMenu />
+        <MobileMenu isLoggedIn={isLoggedIn}/>
         </div>
       </div>
       
