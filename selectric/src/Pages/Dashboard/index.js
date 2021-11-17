@@ -1,6 +1,4 @@
 
-
-
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { DirectionsRenderer, DirectionsService, GoogleMap, InfoWindow, LoadScript, Marker, useLoadScript, StandaloneSearchBox } from "@react-google-maps/api";
 
@@ -13,10 +11,29 @@ import MapOptions from "../../Components/MapOptions";
 import mapStyles from "./mapStyles";
 import Directions from "../../Components/Directions";
 import { letterSpacing } from "@mui/system";
-
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {
+  Avatar,
+  Button,
+  FormControl,
+  FormGroup,
+  Grid,
+  InputLabel,
+  OutlinedInput,
+  Autocomplete,
+  TextField
+} from "@mui/material";
+import { AppBar, Dialog, IconButton, Toolbar } from "@mui/material";
 
 require("dotenv").config();
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 const libraries = ["places"];
 export default function Dashboard() {
@@ -202,6 +219,28 @@ export default function Dashboard() {
   }
 
 
+  const handleChangeAccordion = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  const placesTypeData = ['bar', 'cafe', 'library', 'museum', 'park', 'pharmacy', 'restaurant', 'supermarket',]
+
+  const [expanded, setExpanded] = useState(false);
+
+  const [distance, setDistance] = useState(1)
+  const [placesType, setPlacesType] = useState('')
+
+  const handleDistanceChange = (event) => {
+    console.log(event.target.value)
+    setDistance(event.target.value)
+  }
+  const handlePlacesTypeChange = (event) => {
+    console.log(event)
+    console.log(event.target.innerText)
+    setPlacesType(event.target.innerText)
+    // setDistance(event.target.value)
+  }
+
 
   useLayoutEffect(() => {
 
@@ -218,22 +257,26 @@ export default function Dashboard() {
     titles.forEach((title) => {
       observer.observe(title);
     });
+
+
+
+
     async function fetchChargePoints() {
       if (!values.response) {
         return;
       }
       const polyline =
         values.response && values.response.routes[0].overview_polyline;
-      const distance = 1;
+      //const distance = 1;
       const maxResults = 500;
-      console.log(userData.connectionType)
+      console.log(userData.cars.plugType)
       let connectionID = ''
-      if (userData.connectionType === 'Type 2 (Socket Only)') {
+      if (userData.cars.plugType === 'Type 2 (Socket Only)') {
         connectionID = '25'
         //console.log(connectionID)
       }
 
-      if (userData.connectionType === 'CCS (Type 2)') {
+      if (userData.cars.plugType === 'CCS (Type 2)') {
         connectionID = '25,33'
 
       }
@@ -250,18 +293,7 @@ export default function Dashboard() {
       const markers = data.map((point) => {
         // console.log('HEREE')
 
-        // console.log('HEREE')
-        //  if (userData.connectionType && point.Connections[0].ConnectionType.Title == userData.connectionType) {
-
-
-        // let countConnector = 0
-
-        // for (let i = 0; i < point.Connections.length; i++) {
-        //   if ( userData.connectionType && point.Connections[i].ConnectionType.Title == userData.connectionType) {
-        //     countConnector++
-        //   }
-        // }
-
+        
         // if (countConnector > 0) {
         return {
           name: point.AddressInfo.Title,
@@ -314,6 +346,16 @@ export default function Dashboard() {
   console.log(typeof (selected))
   console.log('PLACES')
   console.log(places)
+
+
+  const [formToDisplay, setFormToDisplay] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+
+
+
+
   return isLoaded ? (
     <>
       <NavBar isLoggedIn={true} />
@@ -324,12 +366,19 @@ export default function Dashboard() {
             style={{ animationDelay: "-0.3s" }}
           >
             <Profile userData={userData} />
+
           </div>
+
+
+
+
+
           <div
             className="options__holder anim"
             style={{ animationDelay: "-0.2s" }}
           >
             <MapOptions
+            handleOpen={handleOpen}
               handleSubmit={handleSubmit}
               handleGo={handleGo}
               handleChange={handleChange}
@@ -337,6 +386,70 @@ export default function Dashboard() {
               setValues={setValues}
             />
           </div>
+          <br />
+          <div>
+
+            
+
+            <Container sx={{ m: 2, p: 2, display: "flex" }}>
+
+              <Dialog open={open} onClose={handleClose}>
+              <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>Charging points distance (miles)</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <FormControl sx={{ m: 1 }} variant="outlined" className='options__item-a'>
+                  <InputLabel htmlFor="accordion-distance">Distance</InputLabel>
+                  <OutlinedInput
+                    id="accordion-distance"
+                    //value={values.from}
+                    onChange={(event) => handleDistanceChange(event)}
+                    label="Distance"
+                  ></OutlinedInput>
+                </FormControl>
+              </AccordionDetails>
+            </Accordion>
+
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>Types of places</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                {/* <FormControl sx={{ m: 1 }} variant="outlined" className='options__item-a'>
+                  <InputLabel htmlFor="accordion-places">Types of places</InputLabel>
+                  
+                </FormControl> */}
+                <Autocomplete
+                  disablePortal
+                  name="cars"
+                  id="combo-box-demo"
+                  options={placesTypeData.map(place => {
+                    return `${capitalizeFirstLetter(place)}`
+                  })}
+                  sx={{ m: 1, width: '90%' }}
+                  value={values.placesTypeData}
+                  onChange={(event) => handlePlacesTypeChange(event)}
+                  isOptionEqualToValue={(option, value) => option.code === value}
+                  renderInput={(params) => <TextField {...params} label="Type of place" />}
+                />
+              </AccordionDetails>
+            </Accordion>
+              </Dialog>
+            </Container>
+
+            
+
+          </div>
+
           <div
             className="directions__holder anim"
             style={{ animationDelay: "-0.1s" }}
@@ -378,6 +491,7 @@ export default function Dashboard() {
                     let request = {
                       location: new window.google.maps.LatLng(marker.lat, marker.lng),
                       radius: 1604,
+                      type: placesType.toLowerCase()
                     }
                     service.nearbySearch(request, (results, status) => {
 
@@ -422,7 +536,7 @@ export default function Dashboard() {
 
 
 
-              : <h1>NO PLACES</h1>}
+              : <h1></h1>}
 
             {selected && (
               <div className="maps__infoWindow">
