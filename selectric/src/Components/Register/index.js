@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Button,
   FormControl,
@@ -62,6 +64,7 @@ export default function Register(props) {
       setGoodLogin(false);
       return;
     }
+    toast.success("success");
     setGoodLogin(true);
     const data = await result.json();
     localStorage.setItem("token", data.token);
@@ -69,6 +72,7 @@ export default function Register(props) {
   };
   return (
     <form onSubmit={handleSubmit}>
+      <ToastContainer />
       <FormGroup>
         <img src={logo} className="form__logo" />
         <h2
