@@ -34,7 +34,6 @@ import './profile.css'
   
 
 export default function Profile( props) {
-  console.log(props.userData)
 
     return (
         <div className='profile__holder'>

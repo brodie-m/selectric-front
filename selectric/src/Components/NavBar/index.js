@@ -8,7 +8,6 @@ import logo from '../../assets/logo.svg'
 import MobileMenu from "../MobileMenu";
 export default function NavBar(props) {
   const isLoggedIn = props.isLoggedIn
-  console.log(isLoggedIn)
   const token = localStorage.getItem('token')
 
   // const toggleDrawer = (anchor, open) => (event) => {
@@ -29,7 +28,6 @@ export default function NavBar(props) {
 
   function handleLogout(e) {
     e.preventDefault();
-    console.log('clicked')
     localStorage.removeItem('token')
     window.location.href = '/'
   }

@@ -41,8 +41,6 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit in progress");
-    console.log(values);
     const options = {
       method: "POST",
       headers: {
