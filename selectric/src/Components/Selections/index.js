@@ -227,6 +227,10 @@ export default function Selections() {
                   <TextField {...params} label="Car Type" />
                 )}
               />
+              <div>
+              {/* <TextField class='car-text' id="standard-basic" label="We will automatically filter charging points where there is a connection with your car's plug type." variant="standard" /> */}
+                 <p class='car-text'>We will automatically filter charging points where there is a connection with your car's plug type.</p> 
+                </div>
               <Button
                 className="selections__submit"
                 sx={{
