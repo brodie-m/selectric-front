@@ -15,7 +15,7 @@ export default function About() {
       
         <Feature
           title="Purpose"
-          text="Selectric is here to ease your transition into a more eco conscious, electrically powered automotive world."
+          text="With the 2030 diesel and petrol ban put in place, the automotive industry is moving into a new age of an electrically powered vehicles. With that in mind, we felt the market lacked an app which is not only able to provide routes based on charging points, but also have the ability to suggest things to do whilst the car is charging. Selectric is here to ease your transition into a more eco conscious, electrically powered world."
         />
         <Feature
           title="How Does It Work?"
