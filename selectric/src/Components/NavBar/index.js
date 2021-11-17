@@ -55,7 +55,7 @@ export default function NavBar(props) {
           <a href="https://selectric.netlify.app/">Home</a>
         </p>
         <p>
-          <a href="https://selectric.netlify.app/">About</a>
+          <a href="https://selectric.netlify.app/#about">About</a>
         </p>
         <p>
           <a href="https://selectric.netlify.app/profile">Profile</a>

@@ -14,7 +14,7 @@ function App() {
   <Router>
     <Switch>
     <Route path = '/' exact> 
-  <Landing className='gradient__bg'/>
+  <Landing />
     </Route>
     <Route path = '/dashboard'>
   <Dashboard/>

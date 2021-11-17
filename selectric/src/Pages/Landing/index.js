@@ -1,5 +1,6 @@
 import { Button, Container, Dialog, Modal } from "@mui/material";
 import React, { useState } from "react";
+
 import Header from "../../Components/Header";
 import Login from "../../Components/Login";
 import NavBar from "../../Components/NavBar";
@@ -15,6 +16,7 @@ export default function Landing() {
       <>
       <NavBar />
       <Header handleOpen={handleOpen} handleClose={handleClose}/>
+      
     </>
     
   );

@@ -4,6 +4,7 @@ import './header.css'
 import map from '../../assets/map.png'
 import Register from '../Register';
 import { flexbox } from '@mui/system';
+import About from '../About';
 export default function Header(props) {
     const [formToDisplay, setFormToDisplay] = useState("");
   const [open, setOpen] = useState(false);
@@ -27,6 +28,7 @@ export default function Header(props) {
         };
     }, [])
     return (
+        <>
         <div className='selectric__header section__padding' id='home'>
             <div className='selectric__header-content anim'>
                 <h1 className='gradient__text anim'>
@@ -49,6 +51,7 @@ export default function Header(props) {
             <div className = 'selectric__header-image' >
                 <img src={map} alt='map'/>
             </div>
+            
            
 
       
@@ -57,5 +60,9 @@ export default function Header(props) {
 </Dialog>
 
         </div>
+        <div>
+            <About/>
+        </div>
+        </>
     )
 }
