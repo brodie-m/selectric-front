@@ -114,7 +114,7 @@ useLayoutEffect(()=> {
     console.log(options)
     const result = await fetch(`https://selectric.herokuapp.com/user`, options)
     if (result.status === 201) {
-        window.location.href = 'http://localhost:3000/dashboard'
+        window.location.href = 'https://selectric.netlify.app/dashboard'
     }
 };
 
