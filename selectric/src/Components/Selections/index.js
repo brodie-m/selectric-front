@@ -7,6 +7,7 @@ import {
   Autocomplete,
   TextField,
   Button,
+  CardMedia,
 } from "@mui/material";
 import { storage } from "../../firebase";
 import React, { useEffect, useLayoutEffect, useState } from "react";
@@ -27,6 +28,7 @@ export default function Selections() {
 
   const handleFileChange = (e) => {
     setValues({ ...values, profile_image: e.target.value });
+    setImage(e.target.files[0]);
   };
 
   const handleCarChange = (e) => {
@@ -160,6 +162,28 @@ export default function Selections() {
         <FormGroup>
           <div className="profile__holder">
             <FormControl sx={{ m: 1, width: "auto" }} variant="outlined">
+              <input
+                type="file"
+                hidden
+                onChange={handleFileChange}
+                ref={(refParam) => (inputRef = refParam)}
+              />
+              {imageUrl ? (
+                <CardMedia
+                  component="img"
+                  height="140"
+                  src={imageUrl}
+                  alt="my image"
+                  title="Dim"
+                  onClick={() => inputRef.click()}
+                />
+              ) : (
+                <Avatar
+                  alt="profile picture"
+                  sx={{ height: "150px", width: "150px" }}
+                  onClick={() => inputRef.click()}
+                />
+              )}
               <Button
                 sx={{
                   m: 1,
@@ -171,12 +195,9 @@ export default function Selections() {
                 }}
                 variant="contained"
                 component="label"
+                onClick={handleFileUpload}
               >
-                <Avatar
-                  alt="profile picture"
-                  sx={{ height: "150px", width: "150px" }}
-                />
-                <input type="file" hidden onChange={handleFileChange} />
+                Upload
               </Button>
               <p className="change__image-text">click to change</p>
             </FormControl>
