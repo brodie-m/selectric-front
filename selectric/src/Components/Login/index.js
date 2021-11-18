@@ -53,7 +53,10 @@ export default function Login() {
       }),
     };
 
-    const result = await fetch("http://localhost:5000/login", options);
+    const result = await fetch(
+      "https://selectric.herokuapp.com/login",
+      options
+    );
     if (result.status !== 200) {
       let errorMsg = await result.text();
       let error = JSON.parse(errorMsg);
