@@ -555,7 +555,9 @@ export default function Dashboard() {
                     }}
                     onClick={async () => {
                       setSelected(marker);
-
+                      if (placesType =='all') {
+                        setPlacesType('')
+                      }
                       let request = {
                         location: new window.google.maps.LatLng(
                           marker.lat,
@@ -601,34 +603,6 @@ export default function Dashboard() {
                     scaledSize: new window.google.maps.Size(30, 30),
                     origin: new window.google.maps.Point(0, 0),
                     anchor: new window.google.maps.Point(10, 10),
-                  }}
-
-                  onClick={async () => {
-
-                    setSelected(marker)
-                    if (placesType == 'all') {
-                      setPlacesType('')
-                    }
-                    let request = {
-                      location: new window.google.maps.LatLng(marker.lat, marker.lng),
-                      radius: 1604,
-                      type: placesType.toLowerCase()
-                    }
-                    service.nearbySearch(request, (results, status) => {
-
-                      if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
-                        const initialPlaces = results.map((place) => {
-                          return {
-                            ...place, lat: place.geometry.location.lat(), lng: place.geometry.location.lng()
-                          }
-                        })
-                        initialPlaces.shift()
-                        initialPlaces.pop()
-                        setPlaces(initialPlaces);
-                      }
-
-                    });
-
                   }}
                 />
               ))

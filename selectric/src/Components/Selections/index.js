@@ -103,12 +103,14 @@ export default function Selections() {
       setUserData(data);
     }
     fetchUserData();
+    
     return () => { };
   }, []);
 
   useEffect(() => {
     if (!userData) return;
     setValues({ ...values, name: userData.username, carObject: userData.cars });
+    setImageUrl(userData.profile_image)
   }, [userData]);
 
   const handleSubmit = async (e) => {
@@ -159,14 +161,12 @@ export default function Selections() {
                 ref={(refParam) => (inputRef = refParam)}
               />
               {imageUrl ? (
-                <CardMedia
-                  component="img"
-                  height="140"
-                  src={imageUrl}
-                  alt="my image"
-                  title="Dim"
-                  onClick={() => inputRef.click()}
-                />
+                <Avatar
+                alt="profile picture"
+                src={imageUrl}
+                sx={{ height: "150px", width: "150px" }}
+                onClick={() => inputRef.click()}
+              />
               ) : (
                 <Avatar
                   alt="profile picture"
