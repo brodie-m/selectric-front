@@ -14,7 +14,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import "./Login.css";
 import logo from "../../assets/logo.svg";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 export default function Login() {
   const [values, setValues] = useState({
     email: "",
@@ -57,7 +57,7 @@ export default function Login() {
       "https://selectric.herokuapp.com/login",
       options
     );
-    if (result.status === 403 || result.status !== 201) {
+    if (result.status !== 200) {
       let errorMsg = await result.text();
       let error = JSON.parse(errorMsg);
       toast.error(error.message);
@@ -65,13 +65,13 @@ export default function Login() {
       return;
     }
     const data = await result.json();
-    toast.success("logged in");
     localStorage.setItem("token", data.token);
     setGoodLogin(true);
     window.location.href = "./dashboard";
   };
   return (
     <form onSubmit={handleSubmit}>
+      <ToastContainer />
       <FormGroup>
         <img src={logo} className="form__logo" />
         <h2

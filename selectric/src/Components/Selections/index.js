@@ -137,7 +137,7 @@ export default function Selections() {
       body: JSON.stringify({
         updates: [
           { name: "username", value: values.name },
-          { name: "profile_image", value: values.profile_image },
+          { name: "profile_image", value: imageUrl },
           {
             name: "cars",
             value: {
