@@ -48,12 +48,14 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+const key = process.env.REACT_APP_GOOGLE_API_KEY;
+const openChargeKey = process.env.REACT_APP_OPEN_API;
 const libraries = ["places"];
 export default function Dashboard() {
   const Url = localStorage.getItem("url");
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCMnp0NR1KzbU5BYQP_MY8CIhBa9CigoGE",
+    googleMapsApiKey: key,
     libraries,
   });
   const [service, setService] = useState(null);
@@ -66,7 +68,7 @@ export default function Dashboard() {
   const [userData, setUserData] = useState(null);
   useLayoutEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
+
     async function fetchUserData() {
       const options = {
         method: "GET",
@@ -96,11 +98,6 @@ export default function Dashboard() {
     lat: 51.5012,
     lng: -0.1354,
   });
-
-  // const handleChange = (prop) => (event) => {
-  //   console.log(event, event.target.value)
-  //   setValues({ ...values, [prop]: event.target.value });
-  // };
 
   function directionsCallback(response) {
     if (response !== null) {
@@ -279,16 +276,12 @@ export default function Dashboard() {
       }
 
       console.log(connectionID);
-      //const result = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&countrycode=GB&maxresults=100?key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`)
       const result = await fetch(
-        `https://api.openchargemap.io/v3/poi/?output=json&distance=${distance}&polyline=${polyline}&maxresults=${maxResults}&connectiontypeid=${connectionID}&key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`
+        `https://api.openchargemap.io/v3/poi/?output=json&distance=${distance}&polyline=${polyline}&maxresults=${maxResults}&connectiontypeid=${connectionID}&key=${openChargeKey}`
       );
       const data = await result.json();
 
       const markers = data.map((point) => {
-        // console.log('HEREE')
-
-        // if (countConnector > 0) {
         return {
           name: point.AddressInfo.Title,
           lat: point.AddressInfo.Latitude,
@@ -314,11 +307,7 @@ export default function Dashboard() {
         };
         //  }
       });
-      console.log(markers);
-      // let markers2 = markers.filter(e => e != null);
-      // let markers3 = markers2.splice(150,200)
-      // console.log(markers3);
-      // console.log(markers)
+
       const shuffled = markers.sort(() => 0.5 - Math.random());
       let markers2 = shuffled.slice(0, 100);
       setMarkers(markers2);
@@ -329,12 +318,6 @@ export default function Dashboard() {
     fetchChargePoints();
     return () => {};
   }, [values.response]);
-
-  console.log("SELECTED");
-  console.log(selected);
-  console.log(typeof selected);
-  console.log("PLACES");
-  console.log(places);
 
   const [formToDisplay, setFormToDisplay] = useState("");
   const [open, setOpen] = useState(false);
@@ -423,10 +406,6 @@ export default function Dashboard() {
                     <Typography>Types of places</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    {/* <FormControl sx={{ m: 1 }} variant="outlined" className='options__item-a'>
-                  <InputLabel htmlFor="accordion-places">Types of places</InputLabel>
-                  
-                </FormControl> */}
                     <Autocomplete
                       disablePortal
                       name="cars"
@@ -518,10 +497,10 @@ export default function Dashboard() {
                               lng: place.geometry.location.lng(),
                             };
                           });
-                          console.log(initialPlaces);
+
                           initialPlaces.shift();
                           initialPlaces.pop();
-                          console.log(initialPlaces);
+
                           setPlaces(initialPlaces);
                         }
                       });
