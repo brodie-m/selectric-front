@@ -39,10 +39,59 @@ import {
   OutlinedInput,
   Autocomplete,
   TextField,
+  Slider
 } from "@mui/material";
 import { AppBar, Dialog, IconButton, Toolbar } from "@mui/material";
 
 require("dotenv").config();
+
+
+
+const marks = [
+  {
+    value: 1,
+    label: '1',
+  },
+  {
+    value: 2,
+    label: '2',
+  },
+  {
+    value: 3,
+    label: '3',
+  },
+  {
+    value: 4,
+    label: '4',
+  },
+  {
+    value: 5,
+    label: '5',
+  },
+  {
+    value: 6,
+    label: '6',
+  },
+  {
+    value: 7,
+    label: '7',
+  },
+  {
+    value: 8,
+    label: '8',
+  },
+  {
+    value: 9,
+    label: '9',
+  },
+  {
+    value: 10,
+    label: '10',
+  },
+];
+
+
+
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -217,16 +266,8 @@ export default function Dashboard() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const placesTypeData = [
-    "bar",
-    "cafe",
-    "library",
-    "museum",
-    "park",
-    "pharmacy",
-    "restaurant",
-    "supermarket",
-  ];
+  const placesTypeData = ['all', 'bar', 'cafe', 'library', 'museum', 'park', 'pharmacy', 'restaurant', 'supermarket',]
+
 
   const [expanded, setExpanded] = useState(false);
 
@@ -287,6 +328,7 @@ export default function Dashboard() {
 
       const markers = data.map((point) => {
         // console.log('HEREE')
+
 
         // if (countConnector > 0) {
         return {
@@ -369,6 +411,7 @@ export default function Dashboard() {
               className="directions__holder anim directions__holder__mobile"
               style={{ animationDelay: "-0.1s" }}
             >
+
               <Directions
                 route={
                   values.response
@@ -381,38 +424,43 @@ export default function Dashboard() {
                     : null
                 }
               />
+
             </div>
           </div>
           <br />
           <div>
+
             <Container sx={{ m: 2, p: 2, display: "flex" }}>
               <Dialog open={open} onClose={handleClose}>
-                <Accordion>
+
+              <Accordion>
+
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                   >
-                    <Typography>Charging points distance (miles)</Typography>
+
+                    <Typography>Choose the type of place you want to visit nearby whilst your car is charging</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <FormControl
-                      sx={{ m: 1 }}
-                      variant="outlined"
-                      className="options__item-a"
-                    >
-                      <InputLabel htmlFor="accordion-distance">
-                        Distance
-                      </InputLabel>
-                      <OutlinedInput
-                        id="accordion-distance"
-                        //value={values.from}
-                        onChange={(event) => handleDistanceChange(event)}
-                        label="Distance"
-                      ></OutlinedInput>
-                    </FormControl>
+
+                    <Autocomplete
+                      disablePortal
+                      name="cars"
+                      id="combo-box-demo"
+                      options={placesTypeData.map(place => {
+                        return `${capitalizeFirstLetter(place)}`
+                      })}
+                      sx={{ m: 1, width: '90%' }}
+                      value={values.placesTypeData}
+                      onChange={(event) => handlePlacesTypeChange(event)}
+                      isOptionEqualToValue={(option, value) => option.code === value}
+                      renderInput={(params) => <TextField {...params} label="Type of place" />}
+                    />
                   </AccordionDetails>
                 </Accordion>
+                
 
                 <Accordion>
                   <AccordionSummary
@@ -420,34 +468,65 @@ export default function Dashboard() {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                   >
-                    <Typography>Types of places</Typography>
+
+                    <Typography>Choose how far away from your route you want charging points to show up for ( miles )</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    {/* <FormControl sx={{ m: 1 }} variant="outlined" className='options__item-a'>
-                  <InputLabel htmlFor="accordion-places">Types of places</InputLabel>
-                  
-                </FormControl> */}
-                    <Autocomplete
-                      disablePortal
-                      name="cars"
-                      id="combo-box-demo"
-                      options={placesTypeData.map((place) => {
-                        return `${capitalizeFirstLetter(place)}`;
-                      })}
-                      sx={{ m: 1, width: "90%" }}
-                      value={values.placesTypeData}
-                      onChange={(event) => handlePlacesTypeChange(event)}
-                      isOptionEqualToValue={(option, value) =>
-                        option.code === value
-                      }
-                      renderInput={(params) => (
-                        <TextField {...params} label="Type of place" />
-                      )}
-                    />
+                    {/* <FormControl sx={{ m: 1 }} variant="outlined" className='options__item-a'> */}
+                    {/* <InputLabel htmlFor="accordion-distance">Distance</InputLabel> */}
+                    {/* <OutlinedInput
+                        // type="number"
+                        // id="accordion-distance"
+                        //value={values.from}
+                        // onChange={(event) => handleDistanceChange(event)}
+                        // label="Distance"
+                      ></OutlinedInput> */}
+                    {/* <Slider
+                        aria-label="Temperature"
+                        defaultValue={1}
+                        // getAriaValueText={valuetext}
+                        // valueLabelDisplay="auto"
+                        step={1}
+                        // marks
+                        min={1}
+                        max={10}
+                        // id="accordion-distance"
+                        onChange={(event) => handleDistanceChange(event)}
+                      // label="Distance"
+                      /> */}
+                    {/* <Slider
+                        aria-label="Temperature"
+                        defaultValue={30}
+                        // getAriaValueText={valuetext}
+                        color="secondary"
+                      /> */}
+                    {/* </FormControl> */}
+                    <div id="accordion-distance-div">
+                      <Slider
+                        aria-label="Temperature"
+                        defaultValue={1}
+                        // getAriaValueText={valuetext}
+                        valueLabelDisplay="auto"
+                        step={1}
+                        marks={marks}
+                        min={1}
+                        max={10}
+                        id="accordion-distance"
+                        onChange={(event) => handleDistanceChange(event)}
+                        label="Distance"
+                      />
+                    </div>
                   </AccordionDetails>
+
                 </Accordion>
+
+                
               </Dialog>
             </Container>
+
+
+
+
           </div>
 
           <div
@@ -543,8 +622,35 @@ export default function Dashboard() {
                     origin: new window.google.maps.Point(0, 0),
                     anchor: new window.google.maps.Point(10, 10),
                   }}
-                  options={{
-                    styles: { backgroundColor: place.icon_background_color },
+
+                  onClick={async () => {
+
+                    setSelected(marker)
+                    if (placesType == 'all') {
+                      setPlacesType('')
+                    }
+                    let request = {
+                      location: new window.google.maps.LatLng(marker.lat, marker.lng),
+                      radius: 1604,
+                      type: placesType.toLowerCase()
+                    }
+                    service.nearbySearch(request, (results, status) => {
+
+                      if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
+                        const initialPlaces = results.map((place) => {
+                          return {
+                            ...place, lat: place.geometry.location.lat(), lng: place.geometry.location.lng()
+                          }
+                        })
+                        console.log(initialPlaces)
+                        initialPlaces.shift()
+                        initialPlaces.pop()
+                        console.log(initialPlaces)
+                        setPlaces(initialPlaces);
+                      }
+
+                    });
+
                   }}
                 />
               ))

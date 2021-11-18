@@ -50,7 +50,7 @@ export default function Selections() {
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
       "state_changed",
-      (snapshot) => {},
+      (snapshot) => { },
       (error) => {
         console.log(error);
       },
@@ -87,7 +87,7 @@ export default function Selections() {
       setCarData(data);
     }
     fetchCarData();
-    return () => {};
+    return () => { };
   }, []);
 
   const [userData, setUserData] = useState(null);
@@ -112,7 +112,7 @@ export default function Selections() {
       setUserData(data);
     }
     fetchUserData();
-    return () => {};
+    return () => { };
   }, []);
 
   useEffect(() => {
@@ -227,6 +227,8 @@ export default function Selections() {
                   <TextField {...params} label="Car Type" />
                 )}
               />
+              <p class='car-text'>We will filter charging stations based on your car's plug type.</p>
+
               <Button
                 className="selections__submit"
                 sx={{
