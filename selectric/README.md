@@ -4,7 +4,7 @@ With the 2030 diesel and petrol ban put in place, the automotive industry is mov
 
 Selectric uses data from Open Charge Maps, along with Google maps, directions, and places APIs to display routes through charging points worldwide using your car specification. However, it doesn't stop there! Selectric suggests activities to do in the local area whilst your car is charging,  based on your preferences.
 
-![Selectric Landing Page](<a href="https://lh3.googleusercontent.com/ygvrvoJy9OGFerUgiCWT5lhLc6tTDpkrsboy2hjZCm_84z6eavhbjTi0sEhcimTkb6Lx5OC2MGmbIZRzpZ6PnmUlGZAvpxNd0cLnjZv0F4bmZY2An-HaLGf6AiXSAQ1Z0heaFySBbw=w2400?source=screenshot.guru"> <img src="https://lh3.googleusercontent.com/ygvrvoJy9OGFerUgiCWT5lhLc6tTDpkrsboy2hjZCm_84z6eavhbjTi0sEhcimTkb6Lx5OC2MGmbIZRzpZ6PnmUlGZAvpxNd0cLnjZv0F4bmZY2An-HaLGf6AiXSAQ1Z0heaFySBbw=w600-h315-p-k" /> </a>)
+![Selectric Landing Page](https://lh3.googleusercontent.com/ygvrvoJy9OGFerUgiCWT5lhLc6tTDpkrsboy2hjZCm_84z6eavhbjTi0sEhcimTkb6Lx5OC2MGmbIZRzpZ6PnmUlGZAvpxNd0cLnjZv0F4bmZY2An-HaLGf6AiXSAQ1Z0heaFySBbw=w2400)
 
 ## Deployed Links
 Front-end: https://selectric.netlify.app

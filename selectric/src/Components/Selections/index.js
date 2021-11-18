@@ -145,8 +145,8 @@ export default function Selections() {
   return (
     <>
     <div class="info-div">
-    <p class="gradient__text1 anim">Hello, Welcome to Selectric!</p>
-    <p class="gradient__text1 anim">Let's get you started on your journey:</p>
+    <p class="gradient__text1 animate">Hello, Welcome to Selectric!</p>
+    <p class="gradient__text1 animate">Let's get you started on your journey:</p>
     </div>
       <form onSubmit={handleSubmit}>
         <FormGroup>
