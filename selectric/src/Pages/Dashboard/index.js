@@ -272,7 +272,7 @@ export default function Dashboard() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const placesTypeData = ['bar', 'cafe', 'library', 'museum', 'park', 'pharmacy', 'restaurant', 'supermarket',]
+  const placesTypeData = ['all','bar', 'cafe', 'library', 'museum', 'park', 'pharmacy', 'restaurant', 'supermarket',]
 
   const [expanded, setExpanded] = useState(false);
 
@@ -578,7 +578,9 @@ export default function Dashboard() {
                   onClick={async () => {
 
                     setSelected(marker)
-
+                    if (placesType == 'all'){
+                      setPlacesType('')
+                    }
                     let request = {
                       location: new window.google.maps.LatLng(marker.lat, marker.lng),
                       radius: 1604,
