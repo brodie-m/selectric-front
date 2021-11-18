@@ -67,6 +67,7 @@
     margin-left: 10px;
 }
 
+
 .title-text {
     font-family: var(--font-family);
     font-weight: 500;
@@ -82,4 +83,9 @@
 .info-div {
     text-align: center;
     margin-bottom: 75px;
+    font-size: 20px;
+    letter-spacing: -0.04em;
+    /* color: var(--color-text); */
+    color: rgb(224, 224, 224);
+    margin-left: 10px;
 }
