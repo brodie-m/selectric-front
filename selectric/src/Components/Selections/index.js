@@ -153,7 +153,7 @@ export default function Selections() {
       <form onSubmit={handleSubmit}>
         <FormGroup>
           <div className="profile__holder">
-            <FormControl sx={{ m: 1, width: "auto" }} variant="outlined">
+            <FormControl sx={{ m: 1, width: "auto", alignSelf: "center" }} variant="outlined">
               <input
                 type="file"
                 hidden
