@@ -40,6 +40,16 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.gradient__text1 {
+  background: var(--gradient-text);
+  font-family: var(--font-family);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 40px;
+  font-weight: 600;
+}
+
 .section__padding {
   padding: 0rem 6rem;
 }

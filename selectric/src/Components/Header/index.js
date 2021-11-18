@@ -41,7 +41,6 @@ export default function Header(props) {
                 <input type='email' placeholder='your email' id='email-input'></input>
                 <button onClick = {() => {
                     const emailToPass = document.getElementById('email-input').value
-                    console.log(emailToPass)
                     handleOpen();
                     setFormToDisplay(<Register email={emailToPass}/>);
                 }}>get started</button>

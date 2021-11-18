@@ -17,6 +17,7 @@ function stringToColor(string) {
     const value = (hash >> (i * 8)) & 0xff;
     color += `00${value.toString(16)}`.substr(-2);
   }
+  
   /* eslint-enable no-bitwise */
 
   return color;

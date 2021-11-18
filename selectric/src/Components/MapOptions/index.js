@@ -40,21 +40,15 @@ export default function MapOptions(props) {
     setSearchBox2(ref);
   };
   // const onPlacesChanged = () => {
-  //   console.log("FROMMMMMMMMMM");
   //   const places = ref.searchBox.getPlaces()
-  //   //console.log(StandaloneSearchBox.getPlaces())
   //   //   handleChange('from', event)
-  //   // console.log(searchBox.getPlaces())
-  //   console.log('places ' + places)
   // }
 
 
   // const onPlacesChanged2 = (event) => {
-  //   console.log("TOOOOOOOOOOOOOO");
   //   handleChange('to', event)
   // }
 
-  //const onPlacesChanged = () => console.log(searchBox);
 
 
 
