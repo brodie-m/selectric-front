@@ -42,7 +42,6 @@ export default function Register(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit in progress");
     const options = {
       method: "POST",
       headers: {

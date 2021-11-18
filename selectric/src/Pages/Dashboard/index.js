@@ -114,8 +114,9 @@ export default function Dashboard() {
 
   const [userData, setUserData] = useState(null);
   useLayoutEffect(() => {
-    const token = localStorage.getItem("token");
-    console.log(token);
+
+    const token = localStorage.getItem('token')
+
     async function fetchUserData() {
       const options = {
         method: "GET",
@@ -147,7 +148,6 @@ export default function Dashboard() {
   });
 
   // const handleChange = (prop) => (event) => {
-  //   console.log(event, event.target.value)
   //   setValues({ ...values, [prop]: event.target.value });
   // };
 
@@ -275,13 +275,12 @@ export default function Dashboard() {
   const [placesType, setPlacesType] = useState("");
 
   const handleDistanceChange = (event) => {
-    console.log(event.target.value);
-    setDistance(event.target.value);
-  };
+
+
+    setDistance(event.target.value)
+  }
   const handlePlacesTypeChange = (event) => {
-    console.log(event);
-    console.log(event.target.innerText);
-    setPlacesType(event.target.innerText);
+    setPlacesType(event.target.innerText)
     // setDistance(event.target.value)
   };
 
@@ -308,18 +307,16 @@ export default function Dashboard() {
         values.response && values.response.routes[0].overview_polyline;
       //const distance = 1;
       const maxResults = 500;
-      console.log(userData.cars.plugType);
-      let connectionID = "";
-      if (userData.cars.plugType === "Type 2 (Socket Only)") {
-        connectionID = "25";
-        //console.log(connectionID)
+
+      let connectionID = ''
+      if (userData.cars.plugType === 'Type 2 (Socket Only)') {
+        connectionID = '25'
       }
 
       if (userData.cars.plugType === "CCS (Type 2)") {
         connectionID = "25,33";
       }
 
-      console.log(connectionID);
       //const result = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&countrycode=GB&maxresults=100?key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`)
       const result = await fetch(
         `https://api.openchargemap.io/v3/poi/?output=json&distance=${distance}&polyline=${polyline}&maxresults=${maxResults}&connectiontypeid=${connectionID}&key=0c36b6d2-3cf6-4f4d-9bf9-fc72140229ab`
@@ -327,7 +324,6 @@ export default function Dashboard() {
       const data = await result.json();
 
       const markers = data.map((point) => {
-        // console.log('HEREE')
 
 
         // if (countConnector > 0) {
@@ -356,27 +352,17 @@ export default function Dashboard() {
         };
         //  }
       });
-      console.log(markers);
+
       // let markers2 = markers.filter(e => e != null);
       // let markers3 = markers2.splice(150,200)
-      // console.log(markers3);
-      // console.log(markers)
+
       const shuffled = markers.sort(() => 0.5 - Math.random());
       let markers2 = shuffled.slice(0, 100);
       setMarkers(markers2);
-
-      // console.log(markers)
-      console.log("checking type ", markers[0]);
     }
     fetchChargePoints();
     return () => {};
   }, [values.response]);
-
-  console.log("SELECTED");
-  console.log(selected);
-  console.log(typeof selected);
-  console.log("PLACES");
-  console.log(places);
 
   const [formToDisplay, setFormToDisplay] = useState("");
   const [open, setOpen] = useState(false);
@@ -642,10 +628,8 @@ export default function Dashboard() {
                             ...place, lat: place.geometry.location.lat(), lng: place.geometry.location.lng()
                           }
                         })
-                        console.log(initialPlaces)
                         initialPlaces.shift()
                         initialPlaces.pop()
-                        console.log(initialPlaces)
                         setPlaces(initialPlaces);
                       }
 

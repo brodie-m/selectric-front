@@ -37,22 +37,15 @@ export default function Selections() {
     const modelName = e.target.innerText.split(`${brandName}`)[1] + " ";
     const carToFind = carData.filter((car) => car.Brand == brandName);
     const carFilter = carToFind.filter((car) => car.Model == modelName);
-    console.log(carToFind);
-    console.log(carFilter);
-
-    console.log(carFilter);
     setValues({ ...values, carObject: carFilter[0] });
-    console.log(values.carObject);
   };
 
   const handleFileUpload = () => {
-    console.log("clicked");
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
       "state_changed",
       (snapshot) => { },
       (error) => {
-        console.log(error);
       },
       () =>
         storage
@@ -60,7 +53,7 @@ export default function Selections() {
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
-            console.log(url);
+
             localStorage.setItem("imageUrl", url);
             setImageUrl(url);
           })
@@ -93,7 +86,6 @@ export default function Selections() {
   const [userData, setUserData] = useState(null);
   useLayoutEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
     async function fetchUserData() {
       const options = {
         method: "GET",
@@ -108,7 +100,6 @@ export default function Selections() {
       );
 
       const data = await result.json();
-      console.log(data);
       setUserData(data);
     }
     fetchUserData();
@@ -120,13 +111,9 @@ export default function Selections() {
     setValues({ ...values, name: userData.username, carObject: userData.cars });
   }, [userData]);
 
-  console.log(carData);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    console.log("submit in progress");
-    console.log(values);
     const options = {
       method: "PATCH",
 
@@ -149,7 +136,6 @@ export default function Selections() {
         ],
       }),
     };
-    console.log(options);
     const result = await fetch(`https://selectric.herokuapp.com/user`, options);
     if (result.status === 201) {
       window.location.href = "https://selectric.netlify.app/dashboard";
@@ -158,6 +144,10 @@ export default function Selections() {
 
   return (
     <>
+    <div class="info-div">
+    <p class="gradient__text1 animate">Hello, Welcome to Selectric!</p>
+    <p class="gradient__text1 animate">Let's get you started on your journey:</p>
+    </div>
       <form onSubmit={handleSubmit}>
         <FormGroup>
           <div className="profile__holder">
@@ -180,17 +170,20 @@ export default function Selections() {
               ) : (
                 <Avatar
                   alt="profile picture"
-                  sx={{ height: "150px", width: "150px" }}
+                  sx={{ height: "150px", width: "150px", alignSelf: "center", color: "#ff4820", backgroundColor:"white"}}
                   onClick={() => inputRef.click()}
                 />
               )}
               <Button
                 sx={{
                   m: 1,
-                  p: 1,
+                  px: 4,
+                  py: 1,
                   width: "90%",
+                  color: "white",
+                  backgroundColor: "#ff4820",
                   "&:hover": {
-                    background: "transparent",
+                    backgroundColor: "#ff4820",
                   },
                 }}
                 variant="contained"
@@ -199,7 +192,6 @@ export default function Selections() {
               >
                 Upload
               </Button>
-              <p className="change__image-text">click to change</p>
             </FormControl>
 
             <div className="names__holder">

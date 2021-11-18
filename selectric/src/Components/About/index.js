@@ -14,12 +14,12 @@ export default function About() {
       <div className="selectric__about-container">
       
         <Feature
-          title="purpose"
-          text="electric cars are here to stay. without them, we are doomed. we wanted a light-weight and user-friendly"
+          title="Purpose"
+          text="With the 2030 diesel and petrol ban put in place, the automotive industry is moving into a new age of an electrically powered vehicles. With that in mind, we felt the market lacked an app which is not only able to provide routes based on charging points, but also have the ability to suggest things to do whilst the car is charging. Selectric is here to ease your transition into a more eco conscious, electrically powered world."
         />
         <Feature
-          title="how does it work"
-          text="selectric uses data from openchargemap, as well a sgoogle maps, directions, and places APIs to display routes through charging points worldwide"
+          title="How Does It Work?"
+          text="Selectric uses data from Open Charge Maps, along with Google maps, directions, and places APIs to display routes through charging points worldwide using your car specification. However, it doesn't stop there! Selectric suggests activities to do in the local area whilst your car is charging,  based on your preferences."
         />
       </div>
     </div>
