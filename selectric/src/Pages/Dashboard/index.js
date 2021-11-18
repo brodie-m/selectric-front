@@ -649,23 +649,28 @@ export default function Dashboard() {
                       </ul>
                     ))}
 
-                    <h3> Places nearby </h3>
+                    <h3 id='places-nearby-1'> Places nearby </h3>
                     {places ? (
                       places.map((place, index) => (
+                        <div id='places-div2'>
                         <ul key={index}>
-                          <li>
+                          <li id='places-nearby-2'>
                             {" "}
                             {place.name}{" "}
-                            <Rating
+                            
+                            
+                          </li>
+                          <li><Rating
                               readOnly
                               value={place.rating}
                               precision={0.5}
                               size="small"
-                            />
-                            {place.user_ratings_total}{" "}
-                            {place.user_ratings_total ? "ratings" : ""}
-                          </li>
+                            /></li>
+                            <li>{place.user_ratings_total}{" "}
+                            {place.user_ratings_total ? "ratings" : ""}</li>
+                            <br/>
                         </ul>
+                        </div>
                       ))
                     ) : (
                       <h1></h1>

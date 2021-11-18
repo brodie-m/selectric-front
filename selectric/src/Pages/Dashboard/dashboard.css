@@ -101,3 +101,19 @@
     margin-left: 50px;
     margin-right: 50px;
 }
+
+#places-div2 {
+    border-color: var(--color-bg);
+
+}
+
+#places-nearby-1{
+    margin-bottom:15px;
+    font-size:20px
+}
+
+#places-nearby-2{
+    font-weight: bold;
+    
+}
+
