@@ -272,7 +272,7 @@ export default function Dashboard() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const placesTypeData = ['all','bar', 'cafe', 'library', 'museum', 'park', 'pharmacy', 'restaurant', 'supermarket',]
+  const placesTypeData = ['all', 'bar', 'cafe', 'library', 'museum', 'park', 'pharmacy', 'restaurant', 'supermarket',]
 
   const [expanded, setExpanded] = useState(false);
 
@@ -449,6 +449,32 @@ export default function Dashboard() {
             <Container sx={{ m: 2, p: 2, display: "flex" }}>
 
               <Dialog open={open} onClose={handleClose}>
+              <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography>Choose the type of place you want to visit nearby whilst your car is charging</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+
+                    <Autocomplete
+                      disablePortal
+                      name="cars"
+                      id="combo-box-demo"
+                      options={placesTypeData.map(place => {
+                        return `${capitalizeFirstLetter(place)}`
+                      })}
+                      sx={{ m: 1, width: '90%' }}
+                      value={values.placesTypeData}
+                      onChange={(event) => handlePlacesTypeChange(event)}
+                      isOptionEqualToValue={(option, value) => option.code === value}
+                      renderInput={(params) => <TextField {...params} label="Type of place" />}
+                    />
+                  </AccordionDetails>
+                </Accordion>
+                
                 <Accordion>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -506,34 +532,7 @@ export default function Dashboard() {
 
                 </Accordion>
 
-                <Accordion>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography>Choose the type of place you want to visit nearby whilst your car is charging</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    {/* <FormControl sx={{ m: 1 }} variant="outlined" className='options__item-a'>
-                  <InputLabel htmlFor="accordion-places">Types of places</InputLabel>
-                  
-                </FormControl> */}
-                    <Autocomplete
-                      disablePortal
-                      name="cars"
-                      id="combo-box-demo"
-                      options={placesTypeData.map(place => {
-                        return `${capitalizeFirstLetter(place)}`
-                      })}
-                      sx={{ m: 1, width: '90%' }}
-                      value={values.placesTypeData}
-                      onChange={(event) => handlePlacesTypeChange(event)}
-                      isOptionEqualToValue={(option, value) => option.code === value}
-                      renderInput={(params) => <TextField {...params} label="Type of place" />}
-                    />
-                  </AccordionDetails>
-                </Accordion>
+                
               </Dialog>
             </Container>
 
@@ -578,7 +577,7 @@ export default function Dashboard() {
                   onClick={async () => {
 
                     setSelected(marker)
-                    if (placesType == 'all'){
+                    if (placesType == 'all') {
                       setPlacesType('')
                     }
                     let request = {
